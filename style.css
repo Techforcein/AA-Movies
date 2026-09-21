@@ -1,0 +1,795 @@
+
+/* ============================================================
+   CONSOLIDATED: global.css
+============================================================ */
+/* ============================================================
+   AA Moviez — Global Styles
+   Design tokens + shared layout primitives used on every page.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Color */
+  --bg: #0A0C12;
+  --bg-elevated: #12151E;
+  --surface: #171B26;
+  --surface-2: #1E2330;
+  --border: rgba(255,255,255,0.08);
+  --text: #F3F4F8;
+  --text-muted: #8B92A6;
+  --text-faint: #5C6377;
+  --accent-a: #5B7FFF;
+  --accent-b: #8B5CF6;
+  --accent-gradient: linear-gradient(135deg, var(--accent-a), var(--accent-b));
+  --gold: #F4C550;
+  --danger: #FF5C72;
+
+  /* Type */
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Layout */
+  --header-h: 68px;
+  --container-pad: 5vw;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --shadow-card: 0 12px 28px rgba(0,0,0,0.45);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-a);
+  outline-offset: 2px;
+}
+
+.container { padding-left: var(--container-pad); padding-right: var(--container-pad); }
+
+/* ---------------- Header ---------------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  padding: 0 var(--container-pad);
+  background: linear-gradient(to bottom, rgba(6,7,11,0.85), transparent);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(9,11,17,0.92);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 1px 0 var(--border);
+}
+
+.header-inner {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-mark {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  background: var(--accent-gradient);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #0A0C12;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.main-nav a {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  transition: color 0.2s;
+  padding: 6px 0;
+}
+
+.main-nav a:hover, .main-nav a.active { color: var(--text); }
+
+.header-actions { display: flex; align-items: center; gap: 18px; }
+
+.search-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+.search-link:hover { color: var(--text); }
+
+.menu-toggle { display: none; font-size: 1.4rem; }
+
+.mobile-nav {
+  position: fixed;
+  top: var(--header-h);
+  left: 0;
+  right: 0;
+  background: rgba(10,12,18,0.98);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  padding: 8px var(--container-pad) 18px;
+  transform: translateY(-8px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+.mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+.mobile-nav a { padding: 12px 0; border-bottom: 1px solid var(--border); color: var(--text-muted); }
+.mobile-nav a:last-child { border-bottom: none; }
+
+@media (max-width: 860px) {
+  .main-nav { display: none; }
+  .menu-toggle { display: block; }
+}
+
+/* ---------------- Buttons ---------------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, opacity 0.15s ease, background 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary { background: var(--text); color: #0A0C12; }
+.btn-primary:hover { opacity: 0.88; }
+
+.btn-secondary {
+  background: rgba(255,255,255,0.1);
+  color: var(--text);
+  backdrop-filter: blur(6px);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.16); }
+
+.btn-ghost {
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--text-faint); }
+
+/* ---------------- Section headings ---------------- */
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 14px;
+  padding: 0 var(--container-pad);
+}
+
+/* ---------------- Content rows ---------------- */
+
+.content-row { margin-bottom: 38px; position: relative; }
+.content-row.empty-row { display: none; }
+
+.row-track {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  padding: 4px var(--container-pad) 10px;
+  cursor: grab;
+  scrollbar-width: none;
+}
+.row-track::-webkit-scrollbar { display: none; }
+.row-track.dragging { cursor: grabbing; scroll-snap-type: none; }
+
+.row-arrow {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(10,12,18,0.75);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.content-row:hover .row-arrow { opacity: 1; }
+.row-arrow.prev { left: 6px; }
+.row-arrow.next { right: 6px; }
+@media (max-width: 720px) { .row-arrow { display: none; } }
+
+/* ---------------- Movie cards ---------------- */
+
+.movie-card {
+  flex: 0 0 auto;
+  width: 190px;
+  scroll-snap-align: start;
+  display: block;
+}
+
+.card-poster {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 2 / 3;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease;
+}
+.card-poster img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.card-poster.landscape, .card-poster img.landscape { aspect-ratio: 16/9; }
+
+.movie-card:hover .card-poster { transform: translateY(-4px); }
+.movie-card:hover .card-poster img { transform: scale(1.06); }
+
+.card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(4,5,9,0.92) 0%, rgba(4,5,9,0.35) 55%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 12px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.movie-card:hover .card-overlay { opacity: 1; }
+
+.card-play {
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.14);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: var(--text);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: auto;
+  backdrop-filter: blur(4px);
+}
+.card-play:hover { background: var(--text); color: #0A0C12; }
+
+.card-meta { display: flex; flex-direction: column; gap: 2px; margin-bottom: 6px; }
+.card-title { font-weight: 600; font-size: 0.88rem; }
+.card-sub { font-size: 0.74rem; color: var(--text-muted); }
+.card-more { font-size: 0.72rem; color: var(--accent-a); font-weight: 600; }
+
+.card-info { display: none; padding-top: 8px; }
+.card-title-static { display: block; font-size: 0.85rem; font-weight: 600; }
+.card-sub-static { display: block; font-size: 0.72rem; color: var(--text-muted); margin-top: 2px; }
+
+.progress-track {
+  position: absolute; left: 8px; right: 8px; bottom: 8px;
+  height: 4px; border-radius: 2px; background: rgba(255,255,255,0.22);
+}
+.progress-fill { height: 100%; border-radius: 2px; background: var(--accent-gradient); }
+
+@media (max-width: 720px) {
+  .movie-card { width: 42vw; max-width: 168px; }
+  .card-overlay { opacity: 1; background: linear-gradient(to top, rgba(4,5,9,0.85), transparent 60%); padding: 8px; }
+  .card-meta, .card-play { display: none; }
+  .card-more { display: none; }
+  .card-info { display: block; }
+}
+
+/* ---------------- Skeleton loaders ---------------- */
+
+.skeleton {
+  background: linear-gradient(100deg, var(--surface) 30%, var(--surface-2) 50%, var(--surface) 70%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: var(--radius-md);
+}
+@keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+.fade-in { animation: fadeIn 0.45s ease both; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------------- Footer ---------------- */
+
+.site-footer {
+  margin-top: 60px;
+  padding: 40px var(--container-pad) 60px;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 0.82rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+  justify-content: space-between;
+}
+.site-footer a { color: var(--text-muted); }
+.site-footer a:hover { color: var(--text); }
+
+/* ---------------- Empty / error states ---------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 90px 20px;
+  color: var(--text-muted);
+}
+.empty-state h2 { font-family: var(--font-display); color: var(--text); margin-bottom: 8px; }
+
+/* ---------------- Toast ---------------- */
+
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 0.88rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 999;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+
+/* ============================================================
+   CONSOLIDATED: home.css
+============================================================ */
+/* ============================================================
+   AA Moviez — Home Page (Hero Carousel)
+   ============================================================ */
+
+.hero-carousel {
+  position: relative;
+  height: 84vh;
+  min-height: 460px;
+  max-height: 780px;
+  margin-top: calc(var(--header-h) * -1);
+  overflow: hidden;
+}
+
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center 22%;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.hero-slide.active { opacity: 1; z-index: 1; }
+
+.hero-gradient {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(to top, rgba(10,12,18,1) 0%, rgba(10,12,18,0.55) 42%, rgba(10,12,18,0.15) 65%, rgba(10,12,18,0.55) 100%),
+    linear-gradient(to right, rgba(10,12,18,0.85) 0%, rgba(10,12,18,0.15) 55%);
+}
+
+.hero-content {
+  position: absolute;
+  left: var(--container-pad);
+  bottom: 14%;
+  max-width: 620px;
+  z-index: 2;
+}
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  line-height: 1.05;
+}
+
+.hero-meta {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 14px;
+}
+
+.hero-desc {
+  color: var(--text);
+  opacity: 0.88;
+  font-size: 1rem;
+  max-width: 52ch;
+  margin: 0 0 24px;
+}
+
+.hero-actions { display: flex; gap: 14px; }
+
+.hero-nav {
+  position: absolute;
+  top: 42%;
+  transform: translateY(-50%);
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(10,12,18,0.55);
+  border: 1px solid var(--border);
+  font-size: 1.5rem;
+  color: var(--text);
+  z-index: 3;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s;
+}
+.hero-nav:hover { background: rgba(10,12,18,0.85); }
+.hero-nav.prev { left: 18px; }
+.hero-nav.next { right: 18px; }
+
+.hero-dots {
+  position: absolute;
+  bottom: 22px;
+  right: var(--container-pad);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+.hero-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  transition: background 0.2s, width 0.2s;
+}
+.hero-dot.active { background: var(--text); width: 22px; border-radius: 4px; }
+
+@media (max-width: 720px) {
+  .hero-carousel { height: 72vh; min-height: 420px; }
+  .hero-content { bottom: 12%; max-width: 90%; }
+  .hero-actions .btn { padding: 10px 16px; font-size: 0.88rem; }
+  .hero-nav { display: none; }
+}
+
+.rows-wrap { padding-top: 34px; }
+
+
+/* ============================================================
+   CONSOLIDATED: explore.css
+============================================================ */
+/* ============================================================
+   AA Moviez — Explore / Search Results / Watchlist
+   ============================================================ */
+
+.page-head {
+  padding: 48px var(--container-pad) 28px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 32px;
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  margin: 0 0 20px;
+}
+
+/* Big intelligent search bar */
+.explore-search {
+  position: relative;
+  max-width: 640px;
+}
+.explore-search input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px 16px 46px;
+  color: var(--text);
+  font-size: 1rem;
+  font-family: var(--font-body);
+}
+.explore-search input:focus { border-color: var(--accent-a); }
+.explore-search .icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+
+.suggestions-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0; right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  z-index: 30;
+  display: none;
+}
+.suggestions-dropdown.open { display: block; }
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+}
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover, .suggestion-item.active { background: var(--surface-2); }
+.suggestion-item img { width: 34px; height: 48px; object-fit: cover; border-radius: 4px; }
+.suggestion-title { font-size: 0.88rem; font-weight: 500; }
+.suggestion-sub { font-size: 0.74rem; color: var(--text-muted); }
+
+/* Browse sections */
+.browse-section { padding: 0 var(--container-pad); margin-bottom: 40px; }
+.browse-heading { font-family: var(--font-display); font-size: 1.1rem; margin-bottom: 16px; }
+
+.chip-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  padding: 9px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  transition: all 0.18s ease;
+}
+.chip:hover { color: var(--text); border-color: var(--text-faint); }
+.chip.active { background: var(--accent-gradient); color: #0A0C12; border-color: transparent; font-weight: 600; }
+
+.popular-list { display: flex; flex-wrap: wrap; gap: 10px; }
+.popular-term {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--text-muted);
+  font-size: 0.84rem;
+}
+.popular-term:hover { color: var(--text); background: var(--surface-2); }
+
+/* Filter bar (search results page) */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0 var(--container-pad);
+  margin-bottom: 28px;
+}
+.filter-bar select, .filter-bar .type-tabs {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 0.84rem;
+  font-family: var(--font-body);
+}
+.type-tabs { display: flex; padding: 4px; gap: 4px; }
+.type-tab { padding: 6px 14px; border-radius: 6px; color: var(--text-muted); font-size: 0.84rem; }
+.type-tab.active { background: var(--accent-gradient); color: #0A0C12; font-weight: 600; }
+
+/* Results grid */
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 18px;
+  padding: 0 var(--container-pad) 40px;
+}
+.results-grid .movie-card { width: auto; }
+
+@media (max-width: 1200px) { .results-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 860px) { .results-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 560px) { .results-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+
+.results-count { padding: 0 var(--container-pad); color: var(--text-muted); font-size: 0.88rem; margin-bottom: 18px; }
+
+
+/* ============================================================
+   CONSOLIDATED: movie.css
+============================================================ */
+/* ============================================================
+   AA Moviez — Movie Details Page
+   ============================================================ */
+
+.detail-backdrop {
+  position: relative;
+  height: 56vh;
+  min-height: 340px;
+  margin-top: calc(var(--header-h) * -1);
+  background-size: cover;
+  background-position: center 20%;
+}
+.detail-backdrop::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--bg) 4%, rgba(10,12,18,0.35) 55%, rgba(10,12,18,0.55) 100%);
+}
+
+.detail-body {
+  padding: 0 var(--container-pad) 40px;
+  margin-top: -120px;
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+}
+
+.detail-poster {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  background: var(--surface);
+}
+
+.detail-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  margin: 0 0 10px;
+}
+
+.detail-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 18px;
+}
+.detail-meta .rating { color: var(--gold); font-weight: 600; }
+
+.detail-desc { max-width: 68ch; color: var(--text); opacity: 0.9; margin-bottom: 24px; }
+
+.detail-actions { display: flex; gap: 14px; margin-bottom: 30px; flex-wrap: wrap; }
+
+.detail-facts { display: flex; flex-direction: column; gap: 8px; font-size: 0.9rem; color: var(--text-muted); max-width: 60ch; }
+.detail-facts b { color: var(--text); font-weight: 600; }
+
+@media (max-width: 820px) {
+  .detail-body { grid-template-columns: 140px 1fr; gap: 18px; margin-top: -90px; }
+  .detail-poster { border-radius: 10px; }
+}
+
+.recs-wrap { padding-top: 46px; }
+
+
+/* ============================================================
+   CONSOLIDATED: player.css
+============================================================ */
+/* ============================================================
+   AA Moviez — Watch Page / Custom Player
+   ============================================================ */
+
+.player-page-header { padding: 16px var(--container-pad); }
+.back-link { color: var(--text-muted); font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; }
+.back-link:hover { color: var(--text); }
+
+#player {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  aspect-ratio: 16/9;
+  background: #000;
+  overflow: hidden;
+}
+#player:fullscreen { max-width: none; }
+
+#video { width: 100%; height: 100%; object-fit: contain; background: #000; }
+
+.center-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  background: rgba(10,12,18,0.55);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1.8rem;
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(4px);
+}
+
+.player-controls {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 34px 18px 14px;
+  background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.player-controls.visible { opacity: 1; transform: translateY(0); }
+
+.progress-bar {
+  height: 5px;
+  background: rgba(255,255,255,0.22);
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  position: relative;
+}
+.progress-bar .progress-fill { height: 100%; border-radius: 3px; background: var(--accent-gradient); width: 0%; }
+
+.controls-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.controls-row .spacer { flex: 1; }
+.controls-row button {
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 6px;
+  border-radius: 6px;
+}
+.controls-row button:hover { background: rgba(255,255,255,0.12); }
+.controls-row button.active { color: var(--accent-a); }
+
+.time-label { color: #E4E6EE; font-size: 0.8rem; min-width: 96px; }
+
+.volume-group { display: flex; align-items: center; gap: 6px; }
+.volume-group input[type="range"] { width: 80px; accent-color: var(--accent-a); }
+
+.player-error {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 8px;
+  background: var(--bg);
+  color: var(--text-muted);
+  text-align: center;
+  padding: 20px;
+}
+
+.watch-info { padding: 28px var(--container-pad) 0; max-width: 1400px; margin: 0 auto; }
+.watch-title { font-family: var(--font-display); font-size: 1.6rem; margin: 0 0 10px; }
+.watch-desc { color: var(--text-muted); max-width: 70ch; margin-bottom: 14px; }
+.watch-cast { color: var(--text-muted); font-size: 0.88rem; }
+.watch-cast b { color: var(--text); }
+
+@media (max-width: 720px) {
+  .volume-group input[type="range"] { width: 50px; }
+  .time-label { min-width: 74px; font-size: 0.72rem; }
+  .controls-row { gap: 8px; }
+}
