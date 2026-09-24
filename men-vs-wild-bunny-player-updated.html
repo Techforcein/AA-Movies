@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="msapplication-navbutton-color" content="#000000">
+
+<title>Men vs Wild • StreamX</title>
+<link rel="icon" type="image/png" href="favicon-file_00000000e048820b91cd39ad4bd06335.png">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --bg: #050507;
+    --surface: #101116;
+    --surface-2: #171820;
+    --text: #f7f7f8;
+    --muted: #a4a6ad;
+    --accent: #1769ff;
+    --accent-2: #6c3cff;
+    --border: rgba(255,255,255,.09);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 5%;
+
+    background: #000;
+    color-scheme: dark;
+
+    transition: .3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(5,5,7,.96);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.logo span {
+    color: #4f8cff;
+}
+
+.nav {
+    display: flex;
+    gap: 28px;
+    margin-left: 42px;
+}
+
+.nav a {
+    color: #b8bac1;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: .2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: white;
+}
+
+.nav-right {
+    margin-left: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.search {
+    width: 220px;
+
+    padding: 11px 15px;
+
+    color: white;
+    background: #000;
+    color-scheme: dark;
+
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 8px;
+
+    outline: none;
+
+    transition: .25s;
+}
+
+.search:focus {
+    border-color: rgba(80,130,255,.6);
+    background: rgba(255,255,255,.1);
+}
+
+.profile {
+    width: 37px;
+    height: 37px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #387eff,
+            #773cff
+        );
+
+    box-shadow: 0 0 20px rgba(70,110,255,.2);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.watch-area {
+    padding-top: 72px;
+    background: #000;
+}
+
+.video-wrapper {
+    width: min(1500px, 100%);
+    margin: auto;
+
+    aspect-ratio: 16 / 9;
+
+    background: #000;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+/* =========================
+   WATCH INFO
+========================= */
+
+.watch-content {
+    width: min(1250px, 90%);
+    margin: auto;
+
+    padding: 42px 0 100px;
+}
+
+.info-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.info-main {
+    max-width: 850px;
+}
+
+.badges {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    margin-bottom: 14px;
+}
+
+.badge {
+    padding: 5px 9px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    border-radius: 5px;
+
+    background: rgba(255,255,255,.1);
+    color: #d7d8dc;
+}
+
+.badge.blue {
+    color: white;
+    background: rgba(45,111,255,.85);
+}
+
+h1 {
+    font-size: clamp(30px, 4vw, 48px);
+
+    line-height: 1.05;
+
+    letter-spacing: -1.8px;
+
+    margin-bottom: 15px;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.metadata span:not(:last-child)::after {
+    content: "•";
+    margin-left: 9px;
+    color: #65666d;
+}
+
+.description {
+    margin-top: 20px;
+
+    color: #b8bac0;
+
+    line-height: 1.75;
+
+    font-size: 15px;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.action {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    transition: .25s;
+}
+
+.action:hover {
+    transform: translateY(-3px);
+
+    background: var(--surface-2);
+
+    border-color: rgba(255,255,255,.2);
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    height: 1px;
+
+    background: var(--border);
+
+    margin: 40px 0;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    margin-top: 40px;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 21px;
+    font-weight: 700;
+}
+
+.section-link {
+    color: #8daeff;
+    font-size: 13px;
+}
+
+/* =========================
+   EPISODES
+========================= */
+
+.episodes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(250px, 1fr));
+
+    gap: 16px;
+}
+
+.episode {
+    position: relative;
+
+    height: 145px;
+
+    overflow: hidden;
+
+    border-radius: 9px;
+
+    background: var(--surface);
+
+    cursor: pointer;
+
+    border: 1px solid transparent;
+
+    transition: .3s;
+}
+
+.episode:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(255,255,255,.14);
+}
+
+.episode img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: .65;
+
+    transition: .4s;
+}
+
+.episode:hover img {
+    transform: scale(1.05);
+    opacity: .8;
+}
+
+.episode-gradient {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            transparent 25%,
+            rgba(0,0,0,.9)
+        );
+}
+
+.episode-info {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    padding: 18px;
+}
+
+.episode-number {
+    color: #aaa;
+
+    font-size: 11px;
+
+    margin-bottom: 4px;
+}
+
+.episode-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* =========================
+   RECOMMENDATIONS
+========================= */
+
+.movies {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 16px;
+}
+
+.movie {
+    cursor: pointer;
+}
+
+.poster {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    aspect-ratio: 16 / 9;
+
+    background: var(--surface);
+}
+
+.poster img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: .4s;
+}
+
+.movie:hover img {
+    transform: scale(1.07);
+}
+
+.movie-name {
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color: #ddd;
+}
+
+.movie-meta {
+    margin-top: 5px;
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    padding: 40px 5%;
+
+    color: #686a71;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 850px) {
+
+    .navbar {
+        height: 58px;
+        padding: 0 15px;
+    }
+
+    .watch-area {
+        padding-top: 58px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .search {
+        width: 130px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .watch-content {
+        width: calc(100% - 30px);
+        padding-top: 28px;
+    }
+
+    .info-layout {
+        display: block;
+    }
+
+    .actions {
+        margin-top: 20px;
+    }
+
+    .movies {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .episodes {
+        grid-template-columns: 1fr;
+    }
+
+    .episode {
+        height: 125px;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .search {
+        display: none;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .metadata {
+        font-size: 12px;
+    }
+
+    .video-wrapper {
+        aspect-ratio: 16 / 9;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar" id="navbar">
+
+    <div class="logo">
+        Stream<span>X</span>
+    </div>
+
+    <nav class="nav">
+        <a href="#" class="active">Home</a>
+        <a href="#">Movies</a>
+        <a href="#">Shows</a>
+        <a href="#">Sports</a>
+        <a href="#">My List</a>
+    </nav>
+
+    <div class="nav-right">
+
+        <input
+            class="search"
+            type="search"
+            placeholder="Search"
+        >
+
+        <div class="profile"></div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     PLAYER
+========================= -->
+
+<section class="watch-area">
+
+    <div class="video-wrapper">
+
+        <iframe
+            src="https://player.mediadelivery.net/play/756384/15fd2780-7a09-443d-a48a-92efab2c5e53"
+            loading="lazy"
+            style="width:100%; height:100%; border:0;"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CONTENT
+========================= -->
+
+<main class="watch-content">
+
+    <div class="info-layout">
+
+        <div class="info-main">
+
+            <div class="badges">
+
+                <span class="badge blue">
+                    STREAMX
+                </span>
+
+                <span class="badge">
+                    HD
+                </span>
+
+                <span class="badge">
+                    ADVENTURE
+                </span>
+
+            </div>
+
+            <h1>
+                Men vs Wild
+            </h1>
+
+            <div class="metadata">
+
+                <span>2026</span>
+                <span>Adventure</span>
+                <span>Survival</span>
+                <span>Hindi</span>
+
+            </div>
+
+            <p class="description">
+                Men vs Wild follows a thrilling survival journey through
+                challenging natural environments, where exploration, endurance
+                and quick decisions become essential. Watch the adventure in
+                high quality with the StreamX player.
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+            <button
+                class="action"
+                title="Add to My List"
+                onclick="addToList()">
+                +
+            </button>
+
+            <button
+                class="action"
+                title="Share"
+                onclick="shareVideo()">
+                ↗
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =========================
+         EPISODES
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Episodes
+            </div>
+
+            <div class="section-link">
+                Season 1
+            </div>
+
+        </div>
+
+
+        <div class="episodes">
+
+            <div class="episode">
+
+                <img
+                    src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=900&q=80"
+                    alt="Episode">
+
+                <div class="episode-gradient"></div>
+
+                <div class="episode-info">
+
+                    <div class="episode-number">
+                        EPISODE 01
+                    </div>
+
+                    <div class="episode-title">
+                        Into the Wild
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="episode">
+
+                <img
+                    src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?auto=format&fit=crop&w=900&q=80"
+                    alt="Episode">
+
+                <div class="episode-gradient"></div>
+
+                <div class="episode-info">
+
+                    <div class="episode-number">
+                        EPISODE 02
+                    </div>
+
+                    <div class="episode-title">
+                        Survival Challenge
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="episode">
+
+                <img
+                    src="https://images.unsplash.com/photo-1485095329183-d0797cdc5676?auto=format&fit=crop&w=900&q=80"
+                    alt="Episode">
+
+                <div class="episode-gradient"></div>
+
+                <div class="episode-info">
+
+                    <div class="episode-number">
+                        EPISODE 03
+                    </div>
+
+                    <div class="episode-title">
+                        Wild Frontier
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MORE LIKE THIS
+    ========================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div class="section-title">
+                More Like This
+            </div>
+
+            <div class="section-link">
+                View All
+            </div>
+
+        </div>
+
+
+        <div class="movies">
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?auto=format&fit=crop&w=900&q=80">
+
+                </div>
+
+                <div class="movie-name">
+                    Movie One
+                </div>
+
+                <div class="movie-meta">
+                    2026 • HD
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?auto=format&fit=crop&w=900&q=80">
+
+                </div>
+
+                <div class="movie-name">
+                    Movie Two
+                </div>
+
+                <div class="movie-meta">
+                    2026 • HD
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1533928298208-27ff66555d8d?auto=format&fit=crop&w=900&q=80">
+
+                </div>
+
+                <div class="movie-name">
+                    Movie Three
+                </div>
+
+                <div class="movie-meta">
+                    2026 • HD
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1534447677768-be436bb09401?auto=format&fit=crop&w=900&q=80">
+
+                </div>
+
+                <div class="movie-name">
+                    Movie Four
+                </div>
+
+                <div class="movie-meta">
+                    2026 • HD
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80">
+
+                </div>
+
+                <div class="movie-name">
+                    Movie Five
+                </div>
+
+                <div class="movie-meta">
+                    2026 • HD
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 StreamX. All rights reserved.
+</footer>
+
+
+<script>
+
+/* Navbar background */
+
+const navbar = document.getElementById("navbar");
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+
+});
+
+
+/* My List */
+
+function addToList() {
+
+    const button = document.querySelector(".action");
+
+    button.textContent = "✓";
+
+    button.style.background = "#1769ff";
+
+}
+
+
+/* Share */
+
+async function shareVideo() {
+
+    const shareData = {
+        title: document.title,
+        text: "Watch this video",
+        url: window.location.href
+    };
+
+    try {
+
+        if (navigator.share) {
+
+            await navigator.share(shareData);
+
+        } else {
+
+            await navigator.clipboard.writeText(
+                window.location.href
+            );
+
+            alert("Link copied!");
+
+        }
+
+    } catch (error) {
+
+        console.log("Share cancelled");
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
