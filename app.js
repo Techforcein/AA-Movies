@@ -547,8 +547,8 @@ function initPlayer(movie) {
    hero carousel, lazy loading, and small shared helpers.
    ============================================================ */
 
-const PLACEHOLDER_POSTER = "https://picsum.photos/seed/aamoviez-fallback/400/600";
-const PLACEHOLDER_BACKDROP = "https://picsum.photos/seed/aamoviez-fallback-bg/1600/900";
+const PLACEHOLDER_POSTER = "file_00000000e048820b91cd39ad4bd06335.png";
+const PLACEHOLDER_BACKDROP = "file_00000000e048820b91cd39ad4bd06335.png";
 
 function qs(name) {
   return new URLSearchParams(window.location.search).get(name);
