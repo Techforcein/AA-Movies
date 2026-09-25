@@ -1,5 +1,6 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +52,7 @@
   </main>
 
 
+  <!-- Firebase Login -->
   <script type="module">
 
     import {
@@ -60,25 +62,30 @@
     } from "./firebase.js";
 
 
-    const loginForm = document.getElementById("loginForm");
-    const emailInput = document.getElementById("emailInput");
-    const passwordInput = document.getElementById("passwordInput");
-    const message = document.getElementById("message");
+    const loginForm =
+      document.getElementById("loginForm");
+
+    const emailInput =
+      document.getElementById("emailInput");
+
+    const passwordInput =
+      document.getElementById("passwordInput");
+
+    const message =
+      document.getElementById("message");
 
 
-    // Check whether the user is already logged in
+    // Check if already logged in
     onAuthStateChanged(auth, (user) => {
 
       if (user) {
-
         window.location.replace("M2.html");
-
       }
 
     });
 
 
-    // Login
+    // Login form
     loginForm.addEventListener("submit", async (event) => {
 
       event.preventDefault();
@@ -86,8 +93,11 @@
       message.textContent = "Logging in...";
 
 
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
+      const email =
+        emailInput.value.trim();
+
+      const password =
+        passwordInput.value;
 
 
       try {
@@ -117,154 +127,23 @@
           message.textContent =
             "Incorrect email or password.";
 
+        }
 
-        } else if (error.code === "auth/invalid-email") {
-
-          message.textContent =
-            "Please enter a valid email.";
-
-
-        } else if (error.code === "auth/too-many-requests") {
-
-          message.textContent =
-            "Too many attempts. Please try again later.";
-
-
-        } else {
-
-    <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Login</title>
-
-  <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-  <main class="card">
-
-    <h1>Login</h1>
-
-    <p>Login to continue</p>
-
-    <form id="loginForm">
-
-      <input
-        id="emailInput"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-        required
-      >
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required
-      >
-
-      <button type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <p id="message"></p>
-
-    <p>
-      Don't have an account?
-      <a href="signup.html">Create account</a>
-    </p>
-
-  </main>
-
-
-  <script type="module">
-
-    import {
-      auth,
-      onAuthStateChanged,
-      signInWithEmailAndPassword
-    } from "./firebase.js";
-
-
-    const loginForm = document.getElementById("loginForm");
-    const emailInput = document.getElementById("emailInput");
-    const passwordInput = document.getElementById("passwordInput");
-    const message = document.getElementById("message");
-
-
-    // Check whether the user is already logged in
-    onAuthStateChanged(auth, (user) => {
-
-      if (user) {
-
-        window.location.replace("M2.html");
-
-      }
-
-    });
-
-
-    // Login
-    loginForm.addEventListener("submit", async (event) => {
-
-      event.preventDefault();
-
-      message.textContent = "Logging in...";
-
-
-      const email = emailInput.value.trim();
-      const password = passwordInput.value;
-
-
-      try {
-
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-
-
-        // Login successful
-        window.location.replace("M2.html");
-
-
-      } catch (error) {
-
-        console.error("Login error:", error);
-
-
-        if (
-          error.code === "auth/invalid-credential" ||
-          error.code === "auth/user-not-found" ||
-          error.code === "auth/wrong-password"
-        ) {
-
-          message.textContent =
-            "Incorrect email or password.";
-
-
-        } else if (error.code === "auth/invalid-email") {
+        else if (error.code === "auth/invalid-email") {
 
           message.textContent =
             "Please enter a valid email.";
 
+        }
 
-        } else if (error.code === "auth/too-many-requests") {
+        else if (error.code === "auth/too-many-requests") {
 
           message.textContent =
             "Too many attempts. Please try again later.";
 
+        }
 
-        } else {
+        else {
 
           message.textContent =
             error.message;
@@ -278,16 +157,5 @@
   </script>
 
 </body>
-</html>      message.textContent =
-            error.message;
 
-        }
-
-      }
-
-    });
-
-  </script>
-
-</body>
 </html>
