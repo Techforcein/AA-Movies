@@ -1,13 +1,139 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sign Up</title><link rel="stylesheet" href="style.css"></head>
-<body><main class="card"><h1>Create account</h1><form id="form">
-<input id="name" placeholder="Name" required><input id="email" type="email" placeholder="Email" required>
-<input id="password" type="password" minlength="6" placeholder="Password (6+ characters)" required>
-<button>Create account</button></form><p id="msg"></p><p>Already have an account? <a href="login.html">Login</a></p></main>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<main class="card">
+
+  <h1>Create account</h1>
+
+  <form id="signupForm">
+
+    <input
+      id="nameInput"
+      type="text"
+      placeholder="Name"
+      required
+    >
+
+    <input
+      id="emailInput"
+      type="email"
+      placeholder="Email"
+      required
+    >
+
+    <input
+      id="passwordInput"
+      type="password"
+      placeholder="Password (6+ characters)"
+      minlength="6"
+      required
+    >
+
+    <button type="submit">Create account</button>
+
+  </form>
+
+  <p id="message"></p>
+
+  <p>
+    Already have an account?
+    <a href="login.html">Login</a>
+  </p>
+
+</main>
+
 <script type="module">
-import {auth,db,createUserWithEmailAndPassword,doc,setDoc,serverTimestamp} from "./firebase.js";
-form.addEventListener("submit",async e=>{e.preventDefault();msg.textContent="Creating account...";
-try{const r=await createUserWithEmailAndPassword(auth,email.value.trim(),password.value);
-await setDoc(doc(db,"users",r.user.uid),{name:name.value.trim(),email:r.user.email,createdAt:serverTimestamp()});
-location.replace("M2.html")}catch(e){msg.textContent=e.code==="auth/email-already-in-use"?"Email already registered.":e.message}});
-</script></body></html>
+
+import {
+  auth,
+  db,
+  createUserWithEmailAndPassword,
+  doc,
+  setDoc,
+  serverTimestamp
+} from "./firebase.js";
+
+
+const signupForm = document.getElementById("signupForm");
+const nameInput = document.getElementById("nameInput");
+const emailInput = document.getElementById("emailInput");
+const passwordInput = document.getElementById("passwordInput");
+const message = document.getElementById("message");
+
+
+signupForm.addEventListener("submit", async (event) => {
+
+  event.preventDefault();
+
+  message.textContent = "Creating account...";
+
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const password = passwordInput.value;
+
+
+  try {
+
+    const result =
+      await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+
+
+    await setDoc(
+      doc(db, "users", result.user.uid),
+      {
+        name: name,
+        email: result.user.email,
+        createdAt: serverTimestamp()
+      }
+    );
+
+
+    window.location.replace("M2.html");
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    if (error.code === "auth/email-already-in-use") {
+
+      message.textContent =
+        "This email is already registered.";
+
+    } else if (error.code === "auth/weak-password") {
+
+      message.textContent =
+        "Password must contain at least 6 characters.";
+
+    } else if (error.code === "auth/invalid-email") {
+
+      message.textContent =
+        "Please enter a valid email.";
+
+    } else {
+
+      message.textContent =
+        error.message;
+
+    }
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
