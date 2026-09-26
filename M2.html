@@ -1,7 +1,1463 @@
-<!doctype html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>M2 Protected Page</title><link rel="stylesheet" href="style.css">
-<script type="module">import {auth,onAuthStateChanged} from "./firebase.js";
-onAuthStateChanged(auth,u=>{if(!u) location.replace("login.html");else document.getElementById("email").textContent=u.email||""});</script></head>
-<body><main class="card"><span class="badge">AUTHENTICATED</span><h1>M2 Protected Page</h1><p>You successfully logged in with Firebase.</p>
-<div class="userbox"><b>Signed in as</b><span id="email">Checking...</span></div><button id="logout">Logout</button></main>
-<script type="module">import {auth,signOut} from "./firebase.js";logout.onclick=async()=>{await signOut(auth);location.replace("login.html")};</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="msapplication-navbutton-color" content="#000000">
+
+<title>Deadpool & Wolverine • AA Movies</title>
+
+<link rel="icon"
+      type="image/png"
+      href="favicon-file_00000000e048820b91cd39ad4bd06335.png">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --bg: #050505;
+    --surface: #111111;
+    --surface-2: #191919;
+    --text: #f7f7f7;
+    --muted: #a4a4a4;
+
+    --red: #e31b23;
+    --red-dark: #a50910;
+    --yellow: #ffd21f;
+
+    --border: rgba(255,255,255,.09);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 72px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 5%;
+
+    background: #000;
+
+    color-scheme: dark;
+
+    transition: .3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(5,5,5,.96);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+/* =========================
+   AA MOVIES LOGO
+========================= */
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+    letter-spacing: -1.5px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+/* =========================
+   NAV
+========================= */
+
+.nav {
+    display: flex;
+
+    gap: 28px;
+
+    margin-left: 42px;
+}
+
+.nav a {
+    color: #b8b8b8;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 500;
+
+    transition: .2s;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: white;
+}
+
+/* =========================
+   NAV RIGHT
+========================= */
+
+.nav-right {
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.search {
+    width: 220px;
+
+    padding: 11px 15px;
+
+    color: white;
+
+    background: #000;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    transition: .25s;
+}
+
+.search::placeholder {
+    color: #777;
+}
+
+.search:focus {
+    border-color: rgba(227,27,35,.7);
+
+    background: #151515;
+}
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile-container {
+    position: relative;
+}
+
+.profile {
+    width: 37px;
+    height: 37px;
+
+    border: 0;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e31b23,
+            #650000
+        );
+
+    box-shadow:
+        0 0 20px rgba(227,27,35,.25);
+
+    cursor: pointer;
+}
+
+/* =========================
+   LOGOUT MENU
+========================= */
+
+.logout-menu {
+    display: none;
+
+    position: absolute;
+
+    right: 0;
+    top: 48px;
+
+    width: 155px;
+
+    padding: 8px;
+
+    background: #151515;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.5);
+}
+
+.logout-menu.show {
+    display: block;
+}
+
+.logout-button {
+    width: 100%;
+
+    padding: 10px;
+
+    border: 0;
+
+    border-radius: 7px;
+
+    background: var(--red);
+
+    color: white;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.logout-button:hover {
+    background: var(--red-dark);
+}
+
+/* =========================
+   VIDEO
+========================= */
+
+.watch-area {
+    padding-top: 72px;
+
+    background: #000;
+}
+
+.video-wrapper {
+    width: min(1500px, 100%);
+
+    margin: auto;
+
+    aspect-ratio: 16 / 9;
+
+    background: #000;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    border: 0;
+}
+
+/* =========================
+   WATCH CONTENT
+========================= */
+
+.watch-content {
+    width: min(1250px, 90%);
+
+    margin: auto;
+
+    padding: 42px 0 100px;
+}
+
+.info-layout {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 50px;
+}
+
+.info-main {
+    max-width: 850px;
+}
+
+/* =========================
+   BADGES
+========================= */
+
+.badges {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 14px;
+
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 5px 9px;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    border-radius: 5px;
+
+    background: rgba(255,255,255,.1);
+
+    color: #d7d7d7;
+}
+
+.badge.red {
+    color: white;
+
+    background: var(--red);
+}
+
+.badge.yellow {
+    color: #111;
+
+    background: var(--yellow);
+}
+
+/* =========================
+   TITLE
+========================= */
+
+h1 {
+    font-size: clamp(30px, 4vw, 52px);
+
+    line-height: 1.05;
+
+    letter-spacing: -2px;
+
+    margin-bottom: 15px;
+
+    font-weight: 900;
+}
+
+/* =========================
+   METADATA
+========================= */
+
+.metadata {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 9px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+}
+
+.metadata span:not(:last-child)::after {
+    content: "•";
+
+    margin-left: 9px;
+
+    color: #656565;
+}
+
+/* =========================
+   DESCRIPTION
+========================= */
+
+.description {
+    margin-top: 20px;
+
+    color: #b8b8b8;
+
+    line-height: 1.75;
+
+    font-size: 15px;
+
+    max-width: 800px;
+}
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+    display: flex;
+
+    gap: 12px;
+
+    align-items: flex-start;
+}
+
+.action {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    border: 1px solid var(--border);
+
+    background: var(--surface);
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 20px;
+
+    transition: .25s;
+}
+
+.action:hover {
+    transform: translateY(-3px);
+
+    background: var(--surface-2);
+
+    border-color: rgba(255,255,255,.2);
+}
+
+.action.added {
+    background: var(--red);
+
+    border-color: var(--red);
+}
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    height: 1px;
+
+    background: var(--border);
+
+    margin: 40px 0;
+}
+
+/* =========================
+   SECTION
+========================= */
+
+.section {
+    margin-top: 40px;
+}
+
+.section-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.section-title {
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+.section-link {
+    color: #ff656b;
+
+    font-size: 13px;
+}
+
+/* =========================
+   MOVIE DETAILS
+========================= */
+
+.details-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.detail-card {
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    padding: 18px;
+
+    transition: .25s;
+}
+
+.detail-card:hover {
+    background: var(--surface-2);
+
+    transform: translateY(-2px);
+}
+
+.detail-label {
+    color: #777;
+
+    font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: .8px;
+
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    color: #eee;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+/* =========================
+   MORE LIKE THIS
+========================= */
+
+.movies {
+    display: grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap: 16px;
+}
+
+.movie {
+    cursor: pointer;
+}
+
+.poster {
+    position: relative;
+
+    overflow: hidden;
+
+    border-radius: 8px;
+
+    aspect-ratio: 16 / 9;
+
+    background:
+        linear-gradient(
+            135deg,
+            #250000,
+            #111 55%,
+            #3b0909
+        );
+
+    border: 1px solid rgba(255,255,255,.06);
+
+    transition: .25s;
+}
+
+.poster::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            135deg,
+            transparent,
+            rgba(227,27,35,.18)
+        );
+}
+
+.poster-content {
+    position: absolute;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 15px;
+
+    z-index: 2;
+}
+
+.poster-title {
+    font-size: 17px;
+
+    font-weight: 900;
+
+    letter-spacing: -0.7px;
+}
+
+.poster-title span {
+    display: block;
+
+    color: var(--red);
+
+    margin-top: 3px;
+}
+
+.movie:hover .poster {
+    transform: scale(1.02);
+}
+
+.movie-name {
+    margin-top: 10px;
+
+    font-size: 13px;
+
+    color: #ddd;
+
+    font-weight: 600;
+}
+
+.movie-meta {
+    margin-top: 5px;
+
+    color: #777;
+
+    font-size: 11px;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    border-top: 1px solid var(--border);
+
+    padding: 40px 5%;
+
+    color: #686868;
+
+    font-size: 12px;
+
+    text-align: center;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 850px) {
+
+    .navbar {
+        height: 58px;
+
+        padding: 0 15px;
+    }
+
+    .watch-area {
+        padding-top: 58px;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .search {
+        width: 130px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .watch-content {
+        width: calc(100% - 30px);
+
+        padding-top: 28px;
+    }
+
+    .info-layout {
+        display: block;
+    }
+
+    .actions {
+        margin-top: 20px;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .movies {
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 12px;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .search {
+        display: none;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+
+    .metadata {
+        font-size: 12px;
+    }
+
+    .video-wrapper {
+        aspect-ratio: 16 / 9;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+========================= -->
+
+<header class="navbar" id="navbar">
+
+    <div class="logo">
+        AA <span>Movies</span>
+    </div>
+
+
+    <nav class="nav">
+
+        <a href="#" class="active">
+            Home
+        </a>
+
+        <a href="#">
+            Movies
+        </a>
+
+        <a href="#">
+            Shows
+        </a>
+
+        <a href="#">
+            Sports
+        </a>
+
+        <a href="#">
+            My List
+        </a>
+
+    </nav>
+
+
+    <div class="nav-right">
+
+        <input
+            class="search"
+            type="search"
+            placeholder="Search">
+
+
+        <div class="profile-container">
+
+            <button
+                class="profile"
+                id="profileButton"
+                title="Account">
+            </button>
+
+
+            <div
+                class="logout-menu"
+                id="logoutMenu">
+
+                <button
+                    class="logout-button"
+                    id="logoutButton">
+
+                    Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     PLAYER
+========================= -->
+
+<section class="watch-area">
+
+    <div class="video-wrapper">
+
+        <iframe
+            src="https://player.mediadelivery.net/play/756384/53f1afe3-e08e-4b93-866f-47e444b24610"
+            loading="lazy"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MOVIE INFORMATION
+========================= -->
+
+<main class="watch-content">
+
+    <div class="info-layout">
+
+
+        <div class="info-main">
+
+
+            <div class="badges">
+
+                <span class="badge red">
+                    AA MOVIES
+                </span>
+
+                <span class="badge yellow">
+                    HD
+                </span>
+
+                <span class="badge">
+                    ACTION
+                </span>
+
+            </div>
+
+
+            <h1>
+                Deadpool & Wolverine
+            </h1>
+
+
+            <div class="metadata">
+
+                <span>2024</span>
+
+                <span>Action</span>
+
+                <span>Comedy</span>
+
+                <span>Superhero</span>
+
+                <span>English</span>
+
+            </div>
+
+
+            <p class="description">
+
+                Deadpool & Wolverine brings Wade Wilson and Wolverine
+                together for a chaotic multiverse adventure. When Deadpool
+                is pulled into a larger conflict, the unlikely duo must
+                work together while dealing with danger, humor and
+                consequences across the Marvel universe.
+
+            </p>
+
+        </div>
+
+
+        <div class="actions">
+
+
+            <button
+                class="action"
+                id="listButton"
+                title="Add to My List">
+
+                +
+
+            </button>
+
+
+            <button
+                class="action"
+                id="shareButton"
+                title="Share">
+
+                ↗
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <!-- =========================
+         MOVIE DETAILS
+    ========================= -->
+
+    <section class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                Movie Details
+            </div>
+
+            <div class="section-link">
+                2024
+            </div>
+
+        </div>
+
+
+        <div class="details-grid">
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Release
+                </div>
+
+                <div class="detail-value">
+                    2024
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Genre
+                </div>
+
+                <div class="detail-value">
+                    Action / Comedy
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Language
+                </div>
+
+                <div class="detail-value">
+                    English
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Format
+                </div>
+
+                <div class="detail-value">
+                    HD
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Type
+                </div>
+
+                <div class="detail-value">
+                    Movie
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Category
+                </div>
+
+                <div class="detail-value">
+                    Superhero
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         MORE LIKE THIS
+    ========================= -->
+
+    <section class="section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+                More Like This
+            </div>
+
+            <div class="section-link">
+                View All
+            </div>
+
+        </div>
+
+
+        <div class="movies">
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div class="poster-content">
+
+                        <div class="poster-title">
+
+                            DEADPOOL
+
+                            <span>
+                                COLLECTION
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="movie-name">
+                    Deadpool
+                </div>
+
+                <div class="movie-meta">
+                    Action • Comedy
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div class="poster-content">
+
+                        <div class="poster-title">
+
+                            DEADPOOL 2
+
+                            <span>
+                                2018
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="movie-name">
+                    Deadpool 2
+                </div>
+
+                <div class="movie-meta">
+                    Action • Comedy
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div class="poster-content">
+
+                        <div class="poster-title">
+
+                            LOGAN
+
+                            <span>
+                                WOLVERINE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="movie-name">
+                    Logan
+                </div>
+
+                <div class="movie-meta">
+                    Action • Drama
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div class="poster-content">
+
+                        <div class="poster-title">
+
+                            X-MEN
+
+                            <span>
+                                UNIVERSE
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="movie-name">
+                    X-Men Collection
+                </div>
+
+                <div class="movie-meta">
+                    Action • Sci-Fi
+                </div>
+
+            </div>
+
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div class="poster-content">
+
+                        <div class="poster-title">
+
+                            WOLVERINE
+
+                            <span>
+                                2009
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="movie-name">
+                    X-Men Origins: Wolverine
+                </div>
+
+                <div class="movie-meta">
+                    Action • Sci-Fi
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+    © 2026 AA Movies. All rights reserved.
+
+</footer>
+
+
+<!-- =========================
+     FIREBASE AUTHENTICATION
+========================= -->
+
+<script type="module">
+
+import {
+    auth,
+    onAuthStateChanged,
+    signOut
+} from "./firebase.js";
+
+
+/* =========================
+   AUTH GUARD
+========================= */
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        window.location.replace("login.html");
+
+    }
+
+});
+
+
+/* =========================
+   PROFILE MENU
+========================= */
+
+const profileButton =
+    document.getElementById("profileButton");
+
+const logoutMenu =
+    document.getElementById("logoutMenu");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+profileButton.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+    logoutMenu.classList.toggle("show");
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener("click", async () => {
+
+    logoutButton.textContent = "Logging out...";
+
+    logoutButton.disabled = true;
+
+
+    try {
+
+        await signOut(auth);
+
+        window.location.replace("login.html");
+
+    } catch (error) {
+
+        console.error(
+            "Logout error:",
+            error
+        );
+
+        logoutButton.textContent = "Logout";
+
+        logoutButton.disabled = false;
+
+        alert(
+            "Unable to logout. Please try again."
+        );
+
+    }
+
+});
+
+
+/* =========================
+   CLOSE PROFILE MENU
+========================= */
+
+document.addEventListener("click", (event) => {
+
+    if (
+        !event.target.closest(".profile-container")
+    ) {
+
+        logoutMenu.classList.remove("show");
+
+    }
+
+});
+
+
+/* =========================
+   NAVBAR SCROLL
+========================= */
+
+const navbar =
+    document.getElementById("navbar");
+
+
+window.addEventListener("scroll", () => {
+
+    if (window.scrollY > 30) {
+
+        navbar.classList.add("scrolled");
+
+    } else {
+
+        navbar.classList.remove("scrolled");
+
+    }
+
+});
+
+
+/* =========================
+   MY LIST
+========================= */
+
+const listButton =
+    document.getElementById("listButton");
+
+
+listButton.addEventListener("click", () => {
+
+    listButton.textContent = "✓";
+
+    listButton.classList.add("added");
+
+    listButton.title =
+        "Added to My List";
+
+});
+
+
+/* =========================
+   SHARE
+========================= */
+
+const shareButton =
+    document.getElementById("shareButton");
+
+
+shareButton.addEventListener(
+    "click",
+    async () => {
+
+        const shareData = {
+
+            title:
+                "Deadpool & Wolverine • AA Movies",
+
+            text:
+                "Watch Deadpool & Wolverine on AA Movies",
+
+            url:
+                window.location.href
+
+        };
+
+
+        try {
+
+            if (navigator.share) {
+
+                await navigator.share(
+                    shareData
+                );
+
+            } else {
+
+                await navigator.clipboard.writeText(
+                    window.location.href
+                );
+
+                alert("Link copied!");
+
+            }
+
+        } catch (error) {
+
+            console.log(
+                "Share cancelled"
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
