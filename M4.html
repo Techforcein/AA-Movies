@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+
+<title>Dhamal 4 • AA Movies</title>
+
+<link rel="icon"
+      type="image/png"
+      href="favicon-file_00000000e048820b91cd39ad4bd06335.png">
+
+<style>
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #050505;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+.navbar {
+    height: 70px;
+    background: #000;
+    display: flex;
+    align-items: center;
+    padding: 0 5%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.logo span {
+    color: #e31b23;
+}
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+}
+
+.profile-container {
+    position: relative;
+}
+
+.profile {
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#e31b23,#650000);
+    cursor: pointer;
+}
+
+.logout-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 48px;
+    width: 155px;
+    padding: 8px;
+    background: #151515;
+    border: 1px solid #292929;
+    border-radius: 10px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.5);
+}
+
+.logout-menu.show {
+    display: block;
+}
+
+.logout-button {
+    width: 100%;
+    padding: 10px;
+    border: 0;
+    border-radius: 7px;
+    background: #e31b23;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background: #a50910;
+}
+
+.watch-area {
+    padding-top: 70px;
+    background: #000;
+}
+
+.video-wrapper {
+    width: min(1500px,100%);
+    margin: auto;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+.content {
+    width: min(1250px,90%);
+    margin: auto;
+    padding: 42px 0 100px;
+}
+
+.info-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.info-main {
+    max-width: 850px;
+}
+
+.badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+
+.badge {
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 11px;
+    font-weight: 800;
+    background: #181818;
+    color: #ddd;
+}
+
+.badge.red {
+    background: #e31b23;
+    color: #fff;
+}
+
+.badge.yellow {
+    background: #ffd21f;
+    color: #111;
+}
+
+h1 {
+    font-size: clamp(30px,4vw,52px);
+    line-height: 1.05;
+    margin-bottom: 15px;
+}
+
+.metadata {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    color: #999;
+    font-size: 14px;
+}
+
+.description {
+    margin-top: 20px;
+    max-width: 800px;
+    color: #aaa;
+    line-height: 1.75;
+    font-size: 15px;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255,255,255,.09);
+    margin: 40px 0;
+}
+
+.section-title {
+    font-size: 21px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 14px;
+}
+
+.detail-card {
+    background: #111;
+    border: 1px solid rgba(255,255,255,.09);
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.detail-label {
+    color: #777;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 7px;
+}
+
+.detail-value {
+    color: #eee;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+footer {
+    border-top: 1px solid rgba(255,255,255,.09);
+    padding: 40px 5%;
+    color: #666;
+    font-size: 12px;
+    text-align: center;
+}
+
+@media(max-width:700px) {
+
+    .navbar {
+        height: 58px;
+        padding: 0 15px;
+    }
+
+    .watch-area {
+        padding-top: 58px;
+    }
+
+    .logo {
+        font-size: 21px;
+    }
+
+    .content {
+        width: calc(100% - 30px);
+        padding-top: 28px;
+    }
+
+    .info-layout {
+        display: block;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media(max-width:500px) {
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 29px;
+    }
+
+    .description {
+        font-size: 14px;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        AA <span>Movies</span>
+    </div>
+
+    <div class="nav-right">
+
+        <div class="profile-container">
+
+            <button
+                class="profile"
+                id="profileButton"
+                title="Account">
+            </button>
+
+            <div
+                class="logout-menu"
+                id="logoutMenu">
+
+                <button
+                    class="logout-button"
+                    id="logoutButton">
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<section class="watch-area">
+
+    <div class="video-wrapper">
+
+        <!-- Use only for content you are authorized to host -->
+        <iframe
+            src="https://player.mediadelivery.net/play/756384/05829b70-2d29-472a-a474-48f13222f2c5"
+            loading="lazy"
+            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+            allowfullscreen>
+        </iframe>
+
+    </div>
+
+</section>
+
+
+<main class="content">
+
+    <div class="info-layout">
+
+        <div class="info-main">
+
+            <div class="badges">
+
+                <span class="badge red">
+                    AA MOVIES
+                </span>
+
+                <span class="badge yellow">
+                    HD
+                </span>
+
+                <span class="badge">
+                    HINDI
+                </span>
+
+                <span class="badge">
+                    COMEDY
+                </span>
+
+            </div>
+
+
+            <h1>
+                Dhamal 4
+            </h1>
+
+
+            <div class="metadata">
+
+                <span>2025</span>
+                <span>Comedy</span>
+                <span>Hindi</span>
+                <span>Movie</span>
+
+            </div>
+
+
+            <p class="description">
+
+                Dhamal 4 is a Hindi comedy movie.
+                This page uses Firebase Authentication
+                to restrict access to signed-in users.
+
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="divider"></div>
+
+
+    <section>
+
+        <div class="section-title">
+            Movie Details
+        </div>
+
+
+        <div class="details-grid">
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Release
+                </div>
+
+                <div class="detail-value">
+                    2025
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Genre
+                </div>
+
+                <div class="detail-value">
+                    Comedy
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Language
+                </div>
+
+                <div class="detail-value">
+                    Hindi
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Format
+                </div>
+
+                <div class="detail-value">
+                    HD
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Type
+                </div>
+
+                <div class="detail-value">
+                    Movie
+                </div>
+
+            </div>
+
+
+            <div class="detail-card">
+
+                <div class="detail-label">
+                    Platform
+                </div>
+
+                <div class="detail-value">
+                    AA Movies
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    © 2026 AA Movies. All rights reserved.
+</footer>
+
+
+<script type="module">
+
+import {
+    auth,
+    onAuthStateChanged,
+    signOut
+} from "./firebase.js";
+
+
+/* =========================
+   AUTHENTICATION GUARD
+========================= */
+
+onAuthStateChanged(auth, (user) => {
+
+    if (!user) {
+
+        window.location.replace("login.html");
+
+    }
+
+});
+
+
+/* =========================
+   PROFILE MENU
+========================= */
+
+const profileButton =
+    document.getElementById("profileButton");
+
+const logoutMenu =
+    document.getElementById("logoutMenu");
+
+const logoutButton =
+    document.getElementById("logoutButton");
+
+
+profileButton.addEventListener("click", (event) => {
+
+    event.stopPropagation();
+
+    logoutMenu.classList.toggle("show");
+
+});
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+logoutButton.addEventListener("click", async () => {
+
+    logoutButton.textContent = "Logging out...";
+
+    logoutButton.disabled = true;
+
+    try {
+
+        await signOut(auth);
+
+        window.location.replace("login.html");
+
+    } catch (error) {
+
+        console.error("Logout error:", error);
+
+        logoutButton.textContent = "Logout";
+
+        logoutButton.disabled = false;
+
+    }
+
+});
+
+
+/* =========================
+   CLOSE MENU
+========================= */
+
+document.addEventListener("click", (event) => {
+
+    if (!event.target.closest(".profile-container")) {
+
+        logoutMenu.classList.remove("show");
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
