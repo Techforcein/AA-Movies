@@ -23,6 +23,7 @@
     href="favicon-file_00000000e048820b91cd39ad4bd06335.png"
 >
 
+
 <style>
 
 /* =========================================================
@@ -45,9 +46,16 @@ body {
 
 body {
     min-height: 100vh;
+
     background: #000;
+
     color: #fff;
-    font-family: Inter, Arial, sans-serif;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
     overflow-x: hidden;
 }
 
@@ -59,14 +67,18 @@ body {
 .background {
 
     position: fixed;
+
     inset: 0;
+
     z-index: -10;
 
     background-image:
         url("https://cdn.marvel.com/content/1x/avengersdoomsday_lob_crd_03.webp");
 
     background-size: cover;
+
     background-position: center;
+
     background-repeat: no-repeat;
 
     transform: scale(1.04);
@@ -79,37 +91,52 @@ body {
         alternate;
 }
 
+
+/*
+   Dark overlay for readability.
+   This does NOT blur the image.
+*/
+
 .background::before {
 
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
         linear-gradient(
             180deg,
-            rgba(0,0,0,.72) 0%,
-            rgba(0,0,0,.55) 35%,
-            rgba(0,0,0,.82) 75%,
-            rgba(0,0,0,.98) 100%
+            rgba(0,0,0,.60) 0%,
+            rgba(0,0,0,.38) 35%,
+            rgba(0,0,0,.65) 70%,
+            rgba(0,0,0,.90) 100%
         );
 }
+
+
+/*
+   Soft edge darkening.
+   No blur.
+*/
 
 .background::after {
 
     content: "";
 
     position: absolute;
+
     inset: 0;
 
     background:
         radial-gradient(
             circle at center,
-            transparent 10%,
-            rgba(0,0,0,.75) 100%
+            transparent 15%,
+            rgba(0,0,0,.55) 100%
         );
 }
+
 
 @keyframes backgroundZoom {
 
@@ -131,17 +158,21 @@ body {
 .navbar {
 
     position: relative;
+
     z-index: 20;
 
     height: 75px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding:
         0 clamp(20px,5vw,55px);
 }
+
 
 .logo {
 
@@ -156,6 +187,7 @@ body {
 
     letter-spacing: -1.8px;
 }
+
 
 .logo span {
 
@@ -173,7 +205,8 @@ body {
 
 .language {
 
-    padding: 9px 13px;
+    padding:
+        9px 13px;
 
     border:
         1px solid
@@ -189,14 +222,14 @@ body {
     outline: none;
 
     font-size: 13px;
-
-    backdrop-filter: blur(10px);
 }
+
 
 .language option {
 
     background: #111;
-    color: white;
+
+    color: #fff;
 }
 
 
@@ -204,9 +237,20 @@ body {
    LOADING SCREEN
 ========================================================= */
 
+/*
+   IMPORTANT:
+   This is transparent.
+
+   Therefore:
+   - background remains visible
+   - no black screen
+   - no blur
+*/
+
 .loading-screen {
 
     position: fixed;
+
     inset: 0;
 
     z-index: 9999;
@@ -214,11 +258,17 @@ body {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    background: #000;
+    background: transparent;
+
+    backdrop-filter: none;
+
+    -webkit-backdrop-filter: none;
 
     opacity: 1;
+
     visibility: visible;
 
     transition:
@@ -226,9 +276,11 @@ body {
         visibility .35s ease;
 }
 
+
 .loading-screen.hide {
 
     opacity: 0;
+
     visibility: hidden;
 
     pointer-events: none;
@@ -244,17 +296,21 @@ body {
     position: relative;
 
     width: 70px;
+
     height: 70px;
 }
+
 
 .dot {
 
     position: absolute;
 
     width: 10px;
+
     height: 10px;
 
     top: 30px;
+
     left: 30px;
 
     border-radius: 50%;
@@ -263,7 +319,7 @@ body {
 
     box-shadow:
         0 0 12px
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.9);
 
     animation:
         circleMove
@@ -271,6 +327,7 @@ body {
         linear
         infinite;
 }
+
 
 .dot:nth-child(1) {
     animation-delay: 0s;
@@ -287,6 +344,7 @@ body {
 .dot:nth-child(4) {
     animation-delay: -.9s;
 }
+
 
 @keyframes circleMove {
 
@@ -335,6 +393,7 @@ body {
 .signup-area {
 
     position: relative;
+
     z-index: 5;
 
     min-height:
@@ -342,8 +401,9 @@ body {
 
     display: flex;
 
-    justify-content: center;
     align-items: center;
+
+    justify-content: center;
 
     padding:
         25px 20px 60px;
@@ -364,26 +424,35 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.16);
+        rgba(255,255,255,.20);
 
     border-radius: 17px;
 
+    /*
+       TRANSPARENT GLASS EFFECT
+    */
+
     background:
-        rgba(0,0,0,.73);
+        rgba(0,0,0,.30);
 
     box-shadow:
 
         0 30px 80px
-        rgba(0,0,0,.75),
+        rgba(0,0,0,.65),
 
         0 0 45px
-        rgba(0,0,0,.35);
+        rgba(0,0,0,.25);
+
+    /*
+       Slight glass effect on card only.
+       The background image itself remains sharp.
+    */
 
     backdrop-filter:
-        blur(15px);
+        blur(8px);
 
     -webkit-backdrop-filter:
-        blur(15px);
+        blur(8px);
 
     opacity: 0;
 
@@ -393,6 +462,7 @@ body {
         translateY(25px)
         scale(.98);
 }
+
 
 .card.show {
 
@@ -404,6 +474,7 @@ body {
         cubic-bezier(.2,.8,.2,1)
         forwards;
 }
+
 
 @keyframes cardAppear {
 
@@ -446,9 +517,10 @@ body {
     margin-bottom: 9px;
 }
 
+
 .subtitle {
 
-    color: #a8a8a8;
+    color: #c0c0c0;
 
     font-size: 14px;
 
@@ -467,11 +539,12 @@ body {
     margin-bottom: 17px;
 }
 
+
 .field label {
 
     display: block;
 
-    color: #ddd;
+    color: #eee;
 
     font-size: 13px;
 
@@ -479,6 +552,7 @@ body {
 
     margin-bottom: 8px;
 }
+
 
 .input {
 
@@ -491,14 +565,14 @@ body {
 
     border:
         1px solid
-        rgba(255,255,255,.20);
+        rgba(255,255,255,.22);
 
     border-radius: 8px;
 
     outline: none;
 
     background:
-        rgba(32,32,32,.94);
+        rgba(15,15,15,.65);
 
     color: #fff;
 
@@ -506,17 +580,21 @@ body {
 
     font-size: 15px;
 
-    transition: .25s ease;
+    transition:
+        .25s ease;
 }
 
+
 .input::placeholder {
-    color: #777;
+
+    color: #8a8a8a;
 }
+
 
 .input:focus {
 
     background:
-        rgba(25,25,25,.98);
+        rgba(10,10,10,.78);
 
     border-color:
         rgba(229,9,20,.9);
@@ -545,13 +623,15 @@ body {
     line-height: 1.4;
 }
 
+
 #message.success {
+
     color: #58e58a;
 }
 
 
 /* =========================================================
-   BUTTON
+   CREATE ACCOUNT BUTTON
 ========================================================= */
 
 .signup-button {
@@ -564,9 +644,10 @@ body {
 
     border-radius: 7px;
 
-    background: #e50914;
+    background:
+        #e50914;
 
-    color: white;
+    color: #fff;
 
     font-family: inherit;
 
@@ -576,16 +657,19 @@ body {
 
     cursor: pointer;
 
-    transition: .2s ease;
+    transition:
+        .2s ease;
 
     box-shadow:
         0 8px 25px
         rgba(229,9,20,.20);
 }
 
+
 .signup-button:hover {
 
-    background: #f20b18;
+    background:
+        #f20b18;
 
     transform:
         translateY(-2px);
@@ -595,9 +679,13 @@ body {
         rgba(229,9,20,.35);
 }
 
+
 .signup-button:active {
-    transform: scale(.98);
+
+    transform:
+        scale(.98);
 }
+
 
 .signup-button:disabled {
 
@@ -610,33 +698,86 @@ body {
 
 
 /* =========================================================
-   LOGIN
+   SIGN IN
 ========================================================= */
 
-.login-text {
+.signin-area {
 
-    margin-top: 23px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+
+    flex-wrap: wrap;
 
     text-align: center;
+}
 
-    color: #888;
+
+.signin-area span {
+
+    color: #aaa;
 
     font-size: 13px;
 }
 
-.login-text a {
+
+.signin-button {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        9px 18px;
+
+    background:
+        rgba(229,9,20,.90);
 
     color: #fff;
 
-    font-weight: 700;
+    border-radius: 6px;
 
     text-decoration: none;
 
-    transition: .2s;
+    font-size: 13px;
+
+    font-weight: 700;
+
+    transition:
+        .25s ease;
+
+    box-shadow:
+        0 6px 20px
+        rgba(229,9,20,.25);
 }
 
-.login-text a:hover {
-    color: #e50914;
+
+.signin-button:hover {
+
+    background:
+        #f20b18;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 10px 28px
+        rgba(229,9,20,.40);
+}
+
+
+.signin-button:active {
+
+    transform:
+        scale(.97);
 }
 
 
@@ -650,7 +791,7 @@ body {
 
     text-align: center;
 
-    color: #626262;
+    color: #777;
 
     font-size: 10px;
 
@@ -672,13 +813,18 @@ body {
             0 18px;
     }
 
+
     .logo {
+
         font-size: 27px;
     }
 
+
     .language {
+
         display: none;
     }
+
 
     .signup-area {
 
@@ -692,6 +838,7 @@ body {
             35px 18px 55px;
     }
 
+
     .card {
 
         padding:
@@ -701,12 +848,30 @@ body {
             15px;
     }
 
+
     .card h1 {
+
         font-size: 31px;
     }
 
+
     .subtitle {
+
         font-size: 13px;
+
+        margin-bottom: 25px;
+    }
+
+
+    .input {
+
+        height: 52px;
+    }
+
+
+    .signup-button {
+
+        height: 53px;
     }
 
 }
@@ -719,11 +884,21 @@ body {
 @media(max-width:380px) {
 
     .card {
-        padding: 27px 19px;
+
+        padding:
+            27px 19px;
     }
 
+
     .card h1 {
+
         font-size: 28px;
+    }
+
+
+    .signin-area {
+
+        gap: 7px;
     }
 
 }
@@ -735,35 +910,7 @@ body {
 
 <body>
 
-<a href="login.html" class="signin-button">
-    Sign In
-</a>
 
-<style>
-.signin-button {
-    display: inline-block;
-    padding: 11px 24px;
-    background: #e50914;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 7px;
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 700;
-    transition: 0.25s ease;
-    box-shadow: 0 6px 20px rgba(229, 9, 20, 0.25);
-}
-
-.signin-button:hover {
-    background: #f20b18;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(229, 9, 20, 0.4);
-}
-
-.signin-button:active {
-    transform: scale(0.97);
-}
-</style>
 <!-- =======================================================
      BACKGROUND
 ======================================================= -->
@@ -789,9 +936,13 @@ body {
 
     <select class="language">
 
-        <option>English</option>
+        <option>
+            English
+        </option>
 
-        <option>हिन्दी</option>
+        <option>
+            हिन्दी
+        </option>
 
     </select>
 
@@ -810,8 +961,11 @@ body {
     <div class="loader">
 
         <div class="dot"></div>
+
         <div class="dot"></div>
+
         <div class="dot"></div>
+
         <div class="dot"></div>
 
     </div>
@@ -847,6 +1001,8 @@ body {
         <form id="signupForm">
 
 
+            <!-- NAME -->
+
             <div class="field">
 
                 <label for="nameInput">
@@ -865,6 +1021,8 @@ body {
             </div>
 
 
+            <!-- EMAIL -->
+
             <div class="field">
 
                 <label for="emailInput">
@@ -882,6 +1040,8 @@ body {
 
             </div>
 
+
+            <!-- PASSWORD -->
 
             <div class="field">
 
@@ -902,31 +1062,49 @@ body {
             </div>
 
 
+            <!-- MESSAGE -->
+
             <p id="message"></p>
 
+
+            <!-- CREATE ACCOUNT -->
 
             <button
                 class="signup-button"
                 id="signupButton"
                 type="submit"
             >
+
                 Create account
+
             </button>
 
 
         </form>
 
 
-        <p class="login-text">
+        <!-- SIGN IN -->
 
-            Already have an account?
+        <div class="signin-area">
 
-            <a href="login.html">
-                Login
+            <span>
+                Already have an account?
+            </span>
+
+
+            <a
+                href="login.html"
+                class="signin-button"
+            >
+
+                Sign In
+
             </a>
 
-        </p>
+        </div>
 
+
+        <!-- FOOTER -->
 
         <p class="footer-text">
 
@@ -950,7 +1128,7 @@ body {
 
 <script>
 
-setTimeout(function () {
+(function () {
 
     const loadingScreen =
         document.getElementById(
@@ -963,11 +1141,24 @@ setTimeout(function () {
         );
 
 
-    loadingScreen.classList.add("hide");
+    /*
+       Keep background visible for exactly
+       3 seconds while dots animate.
+    */
 
-    signupCard.classList.add("show");
+    setTimeout(function () {
 
-}, 3000);
+        loadingScreen.classList.add(
+            "hide"
+        );
+
+        signupCard.classList.add(
+            "show"
+        );
+
+    }, 3000);
+
+})();
 
 </script>
 
@@ -979,14 +1170,25 @@ setTimeout(function () {
 <script type="module">
 
 import {
+
     auth,
+
     db,
+
     createUserWithEmailAndPassword,
+
     doc,
+
     setDoc,
+
     serverTimestamp
+
 } from "./firebase.js";
 
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
 
 const signupForm =
     document.getElementById(
@@ -1038,8 +1240,10 @@ signupForm.addEventListener(
         const name =
             nameInput.value.trim();
 
+
         const email =
             emailInput.value.trim();
+
 
         const password =
             passwordInput.value;
@@ -1051,7 +1255,8 @@ signupForm.addEventListener(
             "Creating account...";
 
 
-        signupButton.disabled = true;
+        signupButton.disabled =
+            true;
 
         signupButton.textContent =
             "Creating account...";
@@ -1079,48 +1284,46 @@ signupForm.addEventListener(
 
 
             /* ==============================================
-               SAVE USER PROFILE
+               SAVE USER DATA TO FIRESTORE
 
-               This runs independently.
-
-               It CANNOT prevent the redirect.
+               We wait for this to finish so the profile
+               is properly saved before redirecting.
             ============================================== */
 
-            setDoc(
+            await setDoc(
+
                 doc(
                     db,
                     "users",
                     result.user.uid
                 ),
+
                 {
-                    name: name,
-                    email: result.user.email,
-                    createdAt: serverTimestamp()
+                    name:
+                        name,
+
+                    email:
+                        result.user.email,
+
+                    createdAt:
+                        serverTimestamp()
                 }
-            )
-            .then(function () {
 
-                console.log(
-                    "Firestore user profile saved."
-                );
+            );
 
-            })
-            .catch(function (error) {
 
-                console.error(
-                    "Firestore profile error:",
-                    error
-                );
-
-            });
+            console.log(
+                "Firestore user profile saved."
+            );
 
 
             /* ==============================================
-               AUTH SUCCESS
+               SUCCESS
             ============================================== */
 
             message.className =
                 "success";
+
 
             message.textContent =
                 "Account created successfully!";
@@ -1131,18 +1334,21 @@ signupForm.addEventListener(
 
 
             /* ==============================================
-               REDIRECT
-
-               Firestore is NOT awaited.
+               REDIRECT TO INDEX
             ============================================== */
 
-            window.location.replace(
-                "index.html"
-            );
+            setTimeout(function () {
+
+                window.location.replace(
+                    "index.html"
+                );
+
+            }, 300);
 
 
-        } catch (error) {
+        }
 
+        catch (error) {
 
             console.error(
                 "Signup error:",
@@ -1153,12 +1359,13 @@ signupForm.addEventListener(
             signupButton.disabled =
                 false;
 
+
             signupButton.textContent =
                 "Create account";
 
 
             /* ==============================================
-               FIREBASE AUTH ERRORS
+               FIREBASE ERRORS
             ============================================== */
 
             if (
@@ -1198,6 +1405,16 @@ signupForm.addEventListener(
 
                 message.textContent =
                     "Email/password authentication is not enabled.";
+
+            }
+
+            else if (
+                error.code ===
+                "permission-denied"
+            ) {
+
+                message.textContent =
+                    "Account created, but your profile could not be saved.";
 
             }
 
