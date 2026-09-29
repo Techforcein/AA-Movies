@@ -1,161 +1,1291 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
 
-  <link rel="stylesheet" href="style.css">
+<title>Login • AA Movies</title>
+
+<link rel="icon"
+      type="image/png"
+      href="favicon-file_00000000e048820b91cd39ad4bd06335.png">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+
+:root {
+    --red: #e31b23;
+    --red-hover: #f52a32;
+    --white: #ffffff;
+    --muted: #b5b5b5;
+    --border: rgba(255,255,255,.25);
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    color: white;
+
+    background: #000;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -5;
+
+    background-image:
+        url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThUMacPd6VbxOBDoZwKm6Dg50bwUZlTHOm7VPFIvuFQiesJMfPuaQVqDE&s=10");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transform: scale(1.04);
+
+    animation:
+        backgroundZoom 14s ease-in-out infinite alternate;
+}
+
+
+@keyframes backgroundZoom {
+
+    from {
+        transform: scale(1.04);
+    }
+
+    to {
+        transform: scale(1.10);
+    }
+
+}
+
+
+/* =========================================================
+   DARK CINEMATIC OVERLAY
+========================================================= */
+
+.background::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.68) 0%,
+            rgba(0,0,0,.58) 35%,
+            rgba(0,0,0,.78) 100%
+        );
+
+}
+
+
+/* Extra side darkness */
+
+.background::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 15%,
+            rgba(0,0,0,.45) 100%
+        );
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   RED AMBIENT LIGHT
+========================================================= */
+
+.red-glow {
+
+    position: fixed;
+
+    width: 500px;
+    height: 500px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(227,27,35,.13);
+
+    filter:
+        blur(100px);
+
+    top: 30%;
+    left: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    pointer-events: none;
+
+    animation:
+        glowPulse 5s ease-in-out infinite;
+
+    z-index: -2;
+}
+
+
+@keyframes glowPulse {
+
+    0%,100% {
+        opacity: .35;
+        transform:
+            translate(-50%,-50%)
+            scale(.9);
+    }
+
+    50% {
+        opacity: .7;
+        transform:
+            translate(-50%,-50%)
+            scale(1.1);
+    }
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: relative;
+
+    z-index: 20;
+
+    height: 80px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 clamp(22px,5vw,60px);
+
+    animation:
+        navbarEnter .7s ease both;
+}
+
+
+@keyframes navbarEnter {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size:
+        clamp(27px,4vw,39px);
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
+
+    text-shadow:
+        0 4px 20px rgba(0,0,0,.6);
+}
+
+
+.logo span {
+
+    color: var(--red);
+
+    text-shadow:
+        0 0 20px
+        rgba(227,27,35,.55);
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.language {
+
+    height: 40px;
+
+    padding:
+        0 13px;
+
+    margin-right: 10px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.5);
+
+    border-radius: 6px;
+
+    background:
+        rgba(0,0,0,.55);
+
+    color: white;
+
+    font-size: 13px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    backdrop-filter:
+        blur(10px);
+
+    -webkit-backdrop-filter:
+        blur(10px);
+}
+
+
+.language option {
+    background: #111;
+    color: white;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.login-area {
+
+    position: relative;
+
+    z-index: 10;
+
+    min-height:
+        calc(100vh - 80px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        30px 20px 100px;
+}
+
+
+/* =========================================================
+   LOGIN BOX
+========================================================= */
+
+.login-box {
+
+    width:
+        min(430px,100%);
+
+    padding:
+        42px 38px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(0,0,0,.70);
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,.75),
+
+        0 0 50px
+        rgba(0,0,0,.5);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    animation:
+        loginEnter .8s
+        cubic-bezier(.2,.8,.2,1)
+        .15s both;
+}
+
+
+@keyframes loginEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(35px)
+            scale(.96);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.login-title {
+
+    font-size:
+        clamp(28px,6vw,36px);
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 9px;
+}
+
+
+.login-subtitle {
+
+    color: #aaa;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.field {
+
+    margin-bottom: 18px;
+}
+
+
+.field label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #ddd;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+
+.input-wrap {
+
+    position: relative;
+}
+
+
+.input-icon {
+
+    position: absolute;
+
+    left: 15px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    color: #777;
+
+    font-size: 15px;
+
+    pointer-events: none;
+
+    transition: .25s;
+}
+
+
+.input {
+
+    width: 100%;
+
+    height: 54px;
+
+    padding:
+        0 45px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        rgba(35,35,35,.85);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition:
+        .25s ease;
+}
+
+
+.input::placeholder {
+    color: #8d8d8d;
+}
+
+
+.input:hover {
+
+    background:
+        rgba(45,45,45,.9);
+}
+
+
+.input:focus {
+
+    border-color:
+        rgba(227,27,35,.85);
+
+    background:
+        rgba(30,30,30,.95);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(227,27,35,.10);
+}
+
+
+.input:focus ~ .input-icon {
+
+    color:
+        var(--red);
+}
+
+
+/* =========================================================
+   PASSWORD BUTTON
+========================================================= */
+
+.password-toggle {
+
+    position: absolute;
+
+    right: 13px;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    border: none;
+
+    background: transparent;
+
+    color: #999;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.password-toggle:hover {
+    color: white;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error {
+
+    min-height: 20px;
+
+    margin:
+        4px 0 10px;
+
+    color:
+        #ff6268;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+.error.shake {
+
+    animation:
+        shake .35s ease;
+}
+
+
+@keyframes shake {
+
+    0%,100% {
+        transform:
+            translateX(0);
+    }
+
+    25% {
+        transform:
+            translateX(-7px);
+    }
+
+    75% {
+        transform:
+            translateX(7px);
+    }
+
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-button {
+
+    position: relative;
+
+    width: 100%;
+
+    height: 52px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background:
+        var(--red);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    overflow: hidden;
+
+    transition:
+        .2s ease;
+
+    box-shadow:
+        0 8px 25px
+        rgba(227,27,35,.18);
+}
+
+
+.login-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 70%;
+
+    height: 100%;
+
+    transform:
+        skewX(-20deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.25),
+            transparent
+        );
+
+    transition:
+        .6s;
+}
+
+
+.login-button:hover::before {
+    left: 130%;
+}
+
+
+.login-button:hover {
+
+    background:
+        var(--red-hover);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(227,27,35,.35);
+}
+
+
+.login-button:active {
+
+    transform:
+        scale(.98);
+}
+
+
+.login-button:disabled {
+
+    opacity: .65;
+
+    cursor: wait;
+}
+
+
+/* =========================================================
+   BOTTOM TEXT
+========================================================= */
+
+.bottom-text {
+
+    margin-top: 25px;
+
+    color: #777;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+.bottom-text span {
+    color: #aaa;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px) {
+
+    .navbar {
+
+        height: 68px;
+
+        padding:
+            0 18px;
+    }
+
+
+    .logo {
+        font-size: 27px;
+    }
+
+
+    .language {
+        display: none;
+    }
+
+
+    .login-area {
+
+        min-height:
+            calc(100vh - 68px);
+
+        align-items:
+            flex-start;
+
+        padding:
+            55px 18px 70px;
+    }
+
+
+    .login-box {
+
+        padding:
+            32px 24px;
+
+        border-radius:
+            13px;
+
+        background:
+            rgba(0,0,0,.76);
+    }
+
+
+    .login-title {
+
+        font-size: 29px;
+    }
+
+
+    .login-subtitle {
+
+        font-size: 13px;
+    }
+
+
+    .input {
+
+        height: 53px;
+    }
+
+
+    .login-button {
+
+        height: 53px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media(max-width:360px) {
+
+    .login-area {
+        padding-top: 35px;
+    }
+
+    .login-box {
+        padding:
+            28px 20px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-  <main class="card">
 
-    <h1>Login</h1>
+<!-- BACKGROUND -->
 
-    <p>Login to continue</p>
+<div class="background"></div>
 
-    <form id="loginForm">
-
-      <input
-        id="emailInput"
-        type="email"
-        placeholder="Email"
-        autocomplete="email"
-        required
-      >
-
-      <input
-        id="passwordInput"
-        type="password"
-        placeholder="Password"
-        autocomplete="current-password"
-        required
-      >
-
-      <button type="submit">
-        Login
-      </button>
-
-    </form>
-
-    <p id="message"></p>
-
-    <p>
-      Don't have an account?
-      <a href="signup.html">Create account</a>
-    </p>
-
-  </main>
+<div class="red-glow"></div>
 
 
-  <!-- Firebase Login -->
-  <script type="module">
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
 
-    import {
-      auth,
-      onAuthStateChanged,
-      signInWithEmailAndPassword
-    } from "./firebase.js";
+<header class="navbar">
 
-
-    const loginForm =
-      document.getElementById("loginForm");
-
-    const emailInput =
-      document.getElementById("emailInput");
-
-    const passwordInput =
-      document.getElementById("passwordInput");
-
-    const message =
-      document.getElementById("message");
+    <a href="#" class="logo">
+        AA <span>Movies</span>
+    </a>
 
 
-    // Check if already logged in
-    onAuthStateChanged(auth, (user) => {
+    <select class="language">
 
-      if (user) {
-        window.location.replace("M2.html");
-      }
+        <option>
+            English
+        </option>
 
-    });
+        <option>
+            हिन्दी
+        </option>
 
+    </select>
 
-    // Login form
-    loginForm.addEventListener("submit", async (event) => {
-
-      event.preventDefault();
-
-      message.textContent = "Logging in...";
+</header>
 
 
-      const email =
-        emailInput.value.trim();
+<!-- =======================================================
+     LOGIN
+======================================================= -->
 
-      const password =
-        passwordInput.value;
+<main class="login-area">
 
 
-      try {
+    <section class="login-box">
 
-        await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
+
+        <h1 class="login-title">
+            Sign In
+        </h1>
+
+
+        <p class="login-subtitle">
+            Sign in to continue watching
+            movies and shows on AA Movies.
+        </p>
+
+
+        <form id="loginForm">
+
+
+            <!-- EMAIL -->
+
+            <div class="field">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        class="input"
+                        id="email"
+                        type="email"
+                        placeholder="Email address"
+                        autocomplete="email"
+                        required>
+
+                    <span class="input-icon">
+                        ✉
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="field">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrap">
+
+                    <input
+                        class="input"
+                        id="password"
+                        type="password"
+                        placeholder="Password"
+                        autocomplete="current-password"
+                        required>
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <button
+                        type="button"
+                        class="password-toggle"
+                        id="passwordToggle">
+
+                        Show
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div
+                class="error"
+                id="errorMessage">
+            </div>
+
+
+            <!-- LOGIN -->
+
+            <button
+                class="login-button"
+                id="loginButton"
+                type="submit">
+
+                <span id="buttonText">
+                    Sign In
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+        <div class="bottom-text">
+
+            By continuing, you agree to use
+            <span>AA Movies</span>
+            responsibly.
+
+            <br>
+
+            © 2026 AA Movies
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+<!-- =======================================================
+     FIREBASE AUTHENTICATION
+======================================================= -->
+
+<script type="module">
+
+import {
+    auth,
+    onAuthStateChanged,
+    signInWithEmailAndPassword
+} from "./firebase.js";
+
+
+const loginForm =
+    document.getElementById("loginForm");
+
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+const passwordToggle =
+    document.getElementById("passwordToggle");
+
+const loginButton =
+    document.getElementById("loginButton");
+
+const buttonText =
+    document.getElementById("buttonText");
+
+const errorMessage =
+    document.getElementById("errorMessage");
+
+
+/* =========================================================
+   ALREADY LOGGED IN
+========================================================= */
+
+onAuthStateChanged(auth, (user) => {
+
+    if (user) {
+
+        window.location.replace(
+            "index.html"
+        );
+
+    }
+
+});
+
+
+/* =========================================================
+   SHOW / HIDE PASSWORD
+========================================================= */
+
+passwordToggle.addEventListener(
+    "click",
+    () => {
+
+        if (
+            passwordInput.type ===
+            "password"
+        ) {
+
+            passwordInput.type =
+                "text";
+
+            passwordToggle.textContent =
+                "Hide";
+
+        } else {
+
+            passwordInput.type =
+                "password";
+
+            passwordToggle.textContent =
+                "Show";
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+loginForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        errorMessage.textContent = "";
+
+        errorMessage.classList.remove(
+            "shake"
         );
 
 
-        // Login successful
-        window.location.replace("M2.html");
+        if (!email || !password) {
 
+            showError(
+                "Please enter your email and password."
+            );
 
-      } catch (error) {
-
-        console.error("Login error:", error);
-
-
-        if (
-          error.code === "auth/invalid-credential" ||
-          error.code === "auth/user-not-found" ||
-          error.code === "auth/wrong-password"
-        ) {
-
-          message.textContent =
-            "Incorrect email or password.";
+            return;
 
         }
 
-        else if (error.code === "auth/invalid-email") {
 
-          message.textContent =
-            "Please enter a valid email.";
+        loginButton.disabled = true;
+
+        buttonText.textContent =
+            "Signing in...";
+
+
+        try {
+
+            await signInWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
+
+
+            buttonText.textContent =
+                "Welcome!";
+
+
+            setTimeout(() => {
+
+                window.location.replace(
+                    "index.html"
+                );
+
+            }, 400);
+
+
+        } catch (error) {
+
+            console.error(
+                "Firebase login error:",
+                error
+            );
+
+
+            let message =
+                "Unable to sign in. Please try again.";
+
+
+            if (
+                error.code ===
+                "auth/invalid-credential"
+            ) {
+
+                message =
+                    "Incorrect email or password.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                message =
+                    "Please enter a valid email.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/user-disabled"
+            ) {
+
+                message =
+                    "This account has been disabled.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/too-many-requests"
+            ) {
+
+                message =
+                    "Too many attempts. Please try again later.";
+
+            }
+
+
+            showError(message);
+
+
+            loginButton.disabled = false;
+
+            buttonText.textContent =
+                "Sign In";
 
         }
 
-        else if (error.code === "auth/too-many-requests") {
+    }
+);
 
-          message.textContent =
-            "Too many attempts. Please try again later.";
 
-        }
+/* =========================================================
+   ERROR
+========================================================= */
 
-        else {
+function showError(message) {
 
-          message.textContent =
-            error.message;
+    errorMessage.textContent =
+        message;
 
-        }
+    errorMessage.classList.remove(
+        "shake"
+    );
 
-      }
+    void errorMessage.offsetWidth;
 
-    });
+    errorMessage.classList.add(
+        "shake"
+    );
 
-  </script>
+}
+
+</script>
+
 
 </body>
-
 </html>
