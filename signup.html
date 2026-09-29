@@ -1,139 +1,1131 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<meta
+    name="theme-color"
+    content="#000000"
+>
+
+<title>Create Account • AA Movies</title>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="favicon-file_00000000e048820b91cd39ad4bd06335.png"
+>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+    --red: #e31b23;
+    --red-hover: #f52a32;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+
+    min-height: 100vh;
+
+    background: #000;
+
+    color: white;
+
+    font-family:
+        Inter,
+        Arial,
+        sans-serif;
+
+    overflow-x: hidden;
+}
+
+
+/* BACKGROUND */
+
+.background {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    background-image:
+        url("https://cdn.marvel.com/content/1x/avengersdoomsday_lob_crd_03.webp");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    transform: scale(1.04);
+
+    animation:
+        backgroundZoom
+        14s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+@keyframes backgroundZoom {
+
+    from {
+        transform: scale(1.04);
+    }
+
+    to {
+        transform: scale(1.10);
+    }
+
+}
+
+.background::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(0,0,0,.72),
+            rgba(0,0,0,.55),
+            rgba(0,0,0,.90)
+        );
+}
+
+.background::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 5%,
+            rgba(0,0,0,.65) 100%
+        );
+
+    z-index: 2;
+}
+
+
+/* RED GLOW */
+
+.red-glow {
+
+    position: fixed;
+
+    width: 420px;
+
+    height: 420px;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background:
+        rgba(227,27,35,.10);
+
+    filter:
+        blur(100px);
+
+    pointer-events: none;
+
+    z-index: -5;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+
+    position: relative;
+
+    z-index: 20;
+
+    height: 78px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        0 clamp(20px,5vw,60px);
+}
+
+.logo {
+
+    color: white;
+
+    text-decoration: none;
+
+    font-size:
+        clamp(27px,4vw,39px);
+
+    font-weight: 900;
+
+    letter-spacing: -2px;
+}
+
+.logo span {
+
+    color: var(--red);
+
+    text-shadow:
+        0 0 20px
+        rgba(227,27,35,.55);
+}
+
+.language {
+
+    height: 40px;
+
+    padding: 0 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    border-radius: 6px;
+
+    background:
+        rgba(0,0,0,.55);
+
+    color: white;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.language option {
+
+    background: #111;
+
+    color: white;
+}
+
+
+/* =========================================================
+   3 SECOND LOADING SCREEN
+========================================================= */
+
+.loading-screen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(0,0,0,.08);
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.loading-screen.hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* FOUR DOTS */
+
+.loader {
+
+    position: relative;
+
+    width: 70px;
+
+    height: 70px;
+}
+
+.dot {
+
+    position: absolute;
+
+    width: 10px;
+
+    height: 10px;
+
+    left: 30px;
+
+    top: 30px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,255,255,.8);
+
+    animation:
+        orbit
+        1.2s
+        linear
+        infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: -.6s;
+}
+
+.dot:nth-child(4) {
+    animation-delay: -.9s;
+}
+
+@keyframes orbit {
+
+    0% {
+
+        transform:
+            rotate(0deg)
+            translateX(25px);
+
+        opacity: .35;
+    }
+
+    50% {
+
+        opacity: 1;
+
+        transform:
+            rotate(180deg)
+            translateX(25px);
+    }
+
+    100% {
+
+        transform:
+            rotate(360deg)
+            translateX(25px);
+
+        opacity: .35;
+    }
+}
+
+
+/* SIGNUP AREA */
+
+.signup-area {
+
+    position: relative;
+
+    z-index: 5;
+
+    min-height:
+        calc(100vh - 78px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding:
+        25px 20px 70px;
+}
+
+
+/* CARD */
+
+.card {
+
+    width:
+        min(440px,100%);
+
+    padding:
+        36px 38px;
+
+    border-radius: 16px;
+
+    background:
+        rgba(0,0,0,.74);
+
+    border:
+        1px solid
+        rgba(255,255,255,.14);
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.8);
+
+    backdrop-filter:
+        blur(14px);
+
+    -webkit-backdrop-filter:
+        blur(14px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(30px)
+        scale(.97);
+}
+
+.card.visible {
+
+    visibility: visible;
+
+    animation:
+        cardEnter
+        .75s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes cardEnter {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(.97);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* TITLE */
+
+.card h1 {
+
+    font-size:
+        clamp(28px,6vw,36px);
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
+
+    margin-bottom: 8px;
+}
+
+.subtitle {
+
+    color: #aaa;
+
+    font-size: 13px;
+
+    line-height: 1.55;
+
+    margin-bottom: 24px;
+}
+
+
+/* INPUTS */
+
+.field {
+
+    margin-bottom: 15px;
+}
+
+.field label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #ddd;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.input {
+
+    width: 100%;
+
+    height: 52px;
+
+    padding: 0 15px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius: 7px;
+
+    outline: none;
+
+    background:
+        rgba(35,35,35,.9);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition: .25s ease;
+}
+
+.input::placeholder {
+    color: #888;
+}
+
+.input:focus {
+
+    border-color:
+        rgba(227,27,35,.9);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(227,27,35,.10);
+}
+
+
+/* MESSAGE */
+
+#message {
+
+    min-height: 19px;
+
+    margin:
+        2px 0 10px;
+
+    color: #ff6268;
+
+    font-size: 12px;
+}
+
+#message.success {
+    color: #62e58a;
+}
+
+
+/* BUTTON */
+
+.signup-button {
+
+    width: 100%;
+
+    height: 53px;
+
+    border: none;
+
+    border-radius: 6px;
+
+    background:
+        var(--red);
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.signup-button:hover {
+
+    background:
+        var(--red-hover);
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(227,27,35,.35);
+}
+
+.signup-button:disabled {
+
+    opacity: .65;
+
+    cursor: wait;
+}
+
+
+/* LOGIN */
+
+.login-link {
+
+    margin-top: 21px;
+
+    text-align: center;
+
+    color: #777;
+
+    font-size: 12px;
+}
+
+.login-link a {
+
+    color: white;
+
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    color: var(--red);
+}
+
+
+/* FOOTER */
+
+.bottom-text {
+
+    margin-top: 17px;
+
+    color: #666;
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.bottom-text span {
+    color: #aaa;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .navbar {
+
+        height: 68px;
+
+        padding:
+            0 18px;
+    }
+
+    .logo {
+        font-size: 27px;
+    }
+
+    .language {
+        display: none;
+    }
+
+    .signup-area {
+
+        min-height:
+            calc(100vh - 68px);
+
+        align-items:
+            flex-start;
+
+        padding:
+            35px 18px 60px;
+    }
+
+    .card {
+
+        padding:
+            29px 23px;
+
+        border-radius:
+            13px;
+    }
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<main class="card">
 
-  <h1>Create account</h1>
+<div class="background"></div>
 
-  <form id="signupForm">
+<div class="red-glow"></div>
 
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="Name"
-      required
+
+<header class="navbar">
+
+    <a
+        href="login.html"
+        class="logo"
+    >
+        AA <span>Movies</span>
+    </a>
+
+    <select class="language">
+
+        <option>
+            English
+        </option>
+
+        <option>
+            हिन्दी
+        </option>
+
+    </select>
+
+</header>
+
+
+<!-- 3 SECOND LOADER -->
+
+<div
+    class="loading-screen"
+    id="loadingScreen"
+>
+
+    <div class="loader">
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+        <div class="dot"></div>
+
+    </div>
+
+</div>
+
+
+<main class="signup-area">
+
+    <section
+        class="card"
+        id="signupCard"
     >
 
-    <input
-      id="emailInput"
-      type="email"
-      placeholder="Email"
-      required
-    >
+        <h1>
+            Create account
+        </h1>
 
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="Password (6+ characters)"
-      minlength="6"
-      required
-    >
+        <p class="subtitle">
 
-    <button type="submit">Create account</button>
+            Join AA Movies and continue
+            watching your favourite movies
+            and shows.
 
-  </form>
+        </p>
 
-  <p id="message"></p>
 
-  <p>
-    Already have an account?
-    <a href="login.html">Login</a>
-  </p>
+        <form id="signupForm">
+
+
+            <div class="field">
+
+                <label for="nameInput">
+                    Name
+                </label>
+
+                <input
+                    class="input"
+                    id="nameInput"
+                    type="text"
+                    placeholder="Name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="emailInput">
+                    Email
+                </label>
+
+                <input
+                    class="input"
+                    id="emailInput"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="passwordInput">
+                    Password
+                </label>
+
+                <input
+                    class="input"
+                    id="passwordInput"
+                    type="password"
+                    placeholder="Password (6+ characters)"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <p id="message"></p>
+
+
+            <button
+                class="signup-button"
+                id="signupButton"
+                type="submit"
+            >
+
+                <span id="buttonText">
+                    Create account
+                </span>
+
+            </button>
+
+
+        </form>
+
+
+        <p class="login-link">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+
+        <p class="bottom-text">
+
+            By creating an account, you agree
+            to use <span>AA Movies</span>
+            responsibly.
+
+            <br>
+
+            © 2026 AA Movies
+
+        </p>
+
+    </section>
 
 </main>
+
+
+<!-- =======================================================
+     LOADER TIMER
+     NOT DEPENDENT ON FIREBASE
+======================================================= -->
+
+<script>
+
+const loadingScreen =
+    document.getElementById(
+        "loadingScreen"
+    );
+
+const signupCard =
+    document.getElementById(
+        "signupCard"
+    );
+
+
+setTimeout(function () {
+
+    loadingScreen.classList.add(
+        "hidden"
+    );
+
+    signupCard.classList.add(
+        "visible"
+    );
+
+}, 3000);
+
+</script>
+
+
+<!-- =======================================================
+     FIREBASE
+======================================================= -->
 
 <script type="module">
 
 import {
-  auth,
-  db,
-  createUserWithEmailAndPassword,
-  doc,
-  setDoc,
-  serverTimestamp
+
+    auth,
+    db,
+
+    createUserWithEmailAndPassword,
+
+    doc,
+    setDoc,
+    serverTimestamp
+
 } from "./firebase.js";
 
 
-const signupForm = document.getElementById("signupForm");
-const nameInput = document.getElementById("nameInput");
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const message = document.getElementById("message");
-
-
-signupForm.addEventListener("submit", async (event) => {
-
-  event.preventDefault();
-
-  message.textContent = "Creating account...";
-
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-
-  try {
-
-    const result =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await setDoc(
-      doc(db, "users", result.user.uid),
-      {
-        name: name,
-        email: result.user.email,
-        createdAt: serverTimestamp()
-      }
+const signupForm =
+    document.getElementById(
+        "signupForm"
     );
 
 
-    window.location.replace("M2.html");
+const nameInput =
+    document.getElementById(
+        "nameInput"
+    );
 
 
-  } catch (error) {
+const emailInput =
+    document.getElementById(
+        "emailInput"
+    );
 
-    console.error(error);
 
-    if (error.code === "auth/email-already-in-use") {
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
 
-      message.textContent =
-        "This email is already registered.";
 
-    } else if (error.code === "auth/weak-password") {
+const message =
+    document.getElementById(
+        "message"
+    );
 
-      message.textContent =
-        "Password must contain at least 6 characters.";
 
-    } else if (error.code === "auth/invalid-email") {
+const signupButton =
+    document.getElementById(
+        "signupButton"
+    );
 
-      message.textContent =
-        "Please enter a valid email.";
 
-    } else {
+const buttonText =
+    document.getElementById(
+        "buttonText"
+    );
 
-      message.textContent =
-        error.message;
+
+signupForm.addEventListener(
+    "submit",
+    async (event) => {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        message.textContent =
+            "Creating account...";
+
+        message.className = "";
+
+
+        signupButton.disabled =
+            true;
+
+        buttonText.textContent =
+            "Creating account...";
+
+
+        try {
+
+
+            /* CREATE FIREBASE ACCOUNT */
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            /* SAVE USER DATA */
+
+            await setDoc(
+
+                doc(
+                    db,
+                    "users",
+                    result.user.uid
+                ),
+
+                {
+
+                    name: name,
+
+                    email:
+                        result.user.email,
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+
+            );
+
+
+            /* SUCCESS */
+
+            message.textContent =
+                "Account created successfully!";
+
+            message.className =
+                "success";
+
+            buttonText.textContent =
+                "Account Created!";
+
+
+            /* GO TO M2 */
+
+            setTimeout(() => {
+
+                window.location.replace(
+                    "M2.html"
+                );
+
+            }, 500);
+
+
+        } catch (error) {
+
+            console.error(
+                "Signup error:",
+                error
+            );
+
+
+            signupButton.disabled =
+                false;
+
+            buttonText.textContent =
+                "Create account";
+
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                message.textContent =
+                    "This email is already registered.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                message.textContent =
+                    "Password must contain at least 6 characters.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                message.textContent =
+                    "Please enter a valid email.";
+
+            }
+
+            else {
+
+                message.textContent =
+                    error.message;
+
+            }
+
+        }
 
     }
-
-  }
-
-});
+);
 
 </script>
 
+
 </body>
+
 </html>
