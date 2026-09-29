@@ -4,16 +4,8 @@
 <head>
 
 <meta charset="utf-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
->
-
-<meta
-    name="theme-color"
-    content="#000000"
->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#000000">
 
 <title>Create Account • AA Movies</title>
 
@@ -23,12 +15,7 @@
     href="favicon-file_00000000e048820b91cd39ad4bd06335.png"
 >
 
-
 <style>
-
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
@@ -46,39 +33,25 @@ body {
 
 body {
     min-height: 100vh;
-
     background: #000;
-
     color: #fff;
-
-    font-family:
-        Inter,
-        Arial,
-        sans-serif;
-
+    font-family: Inter, Arial, sans-serif;
     overflow-x: hidden;
 }
 
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
+/* ================= BACKGROUND ================= */
 
 .background {
-
     position: fixed;
-
     inset: 0;
-
     z-index: -10;
 
     background-image:
         url("https://cdn.marvel.com/content/1x/avengersdoomsday_lob_crd_03.webp");
 
     background-size: cover;
-
     background-position: center;
-
     background-repeat: no-repeat;
 
     transform: scale(1.04);
@@ -91,18 +64,9 @@ body {
         alternate;
 }
 
-
-/*
-   Dark overlay for readability.
-   This does NOT blur the image.
-*/
-
 .background::before {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
 
     background:
@@ -115,18 +79,9 @@ body {
         );
 }
 
-
-/*
-   Soft edge darkening.
-   No blur.
-*/
-
 .background::after {
-
     content: "";
-
     position: absolute;
-
     inset: 0;
 
     background:
@@ -136,7 +91,6 @@ body {
             rgba(0,0,0,.55) 100%
         );
 }
-
 
 @keyframes backgroundZoom {
 
@@ -151,46 +105,34 @@ body {
 }
 
 
-/* =========================================================
-   NAVBAR
-========================================================= */
+/* ================= NAVBAR ================= */
 
 .navbar {
-
     position: relative;
-
     z-index: 20;
 
     height: 75px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     padding:
         0 clamp(20px,5vw,55px);
 }
 
-
 .logo {
-
     color: #fff;
-
     text-decoration: none;
 
     font-size:
         clamp(25px,4vw,34px);
 
     font-weight: 900;
-
     letter-spacing: -1.8px;
 }
 
-
 .logo span {
-
     color: #e50914;
 
     text-shadow:
@@ -199,14 +141,10 @@ body {
 }
 
 
-/* =========================================================
-   LANGUAGE
-========================================================= */
+/* ================= LANGUAGE ================= */
 
 .language {
-
-    padding:
-        9px 13px;
+    padding: 9px 13px;
 
     border:
         1px solid
@@ -220,55 +158,34 @@ body {
     color: #fff;
 
     outline: none;
-
     font-size: 13px;
 }
 
-
 .language option {
-
     background: #111;
-
     color: #fff;
 }
 
 
-/* =========================================================
-   LOADING SCREEN
-========================================================= */
-
-/*
-   IMPORTANT:
-   This is transparent.
-
-   Therefore:
-   - background remains visible
-   - no black screen
-   - no blur
-*/
+/* ================= LOADING ================= */
 
 .loading-screen {
-
     position: fixed;
-
     inset: 0;
 
     z-index: 9999;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
+    /*
+       IMPORTANT:
+       Transparent so background remains visible.
+    */
     background: transparent;
 
-    backdrop-filter: none;
-
-    -webkit-backdrop-filter: none;
-
     opacity: 1;
-
     visibility: visible;
 
     transition:
@@ -276,41 +193,29 @@ body {
         visibility .35s ease;
 }
 
-
 .loading-screen.hide {
-
     opacity: 0;
-
     visibility: hidden;
-
     pointer-events: none;
 }
 
 
-/* =========================================================
-   FOUR DOT CIRCULAR LOADER
-========================================================= */
+/* ================= FOUR DOT LOADER ================= */
 
 .loader {
-
     position: relative;
 
     width: 70px;
-
     height: 70px;
 }
 
-
 .dot {
-
     position: absolute;
 
     width: 10px;
-
     height: 10px;
 
     top: 30px;
-
     left: 30px;
 
     border-radius: 50%;
@@ -328,7 +233,6 @@ body {
         infinite;
 }
 
-
 .dot:nth-child(1) {
     animation-delay: 0s;
 }
@@ -345,11 +249,9 @@ body {
     animation-delay: -.9s;
 }
 
-
 @keyframes circleMove {
 
     0% {
-
         transform:
             rotate(0deg)
             translateX(25px);
@@ -362,7 +264,6 @@ body {
     }
 
     50% {
-
         transform:
             rotate(180deg)
             translateX(25px);
@@ -375,7 +276,6 @@ body {
     }
 
     100% {
-
         transform:
             rotate(360deg)
             translateX(25px);
@@ -386,23 +286,17 @@ body {
 }
 
 
-/* =========================================================
-   MAIN
-========================================================= */
+/* ================= MAIN ================= */
 
 .signup-area {
-
     position: relative;
-
     z-index: 5;
 
     min-height:
         calc(100vh - 75px);
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     padding:
@@ -410,12 +304,9 @@ body {
 }
 
 
-/* =========================================================
-   SIGNUP CARD
-========================================================= */
+/* ================= CARD ================= */
 
 .card {
-
     width:
         min(470px,100%);
 
@@ -428,10 +319,6 @@ body {
 
     border-radius: 17px;
 
-    /*
-       TRANSPARENT GLASS EFFECT
-    */
-
     background:
         rgba(0,0,0,.30);
 
@@ -443,11 +330,6 @@ body {
         0 0 45px
         rgba(0,0,0,.25);
 
-    /*
-       Slight glass effect on card only.
-       The background image itself remains sharp.
-    */
-
     backdrop-filter:
         blur(8px);
 
@@ -455,7 +337,6 @@ body {
         blur(8px);
 
     opacity: 0;
-
     visibility: hidden;
 
     transform:
@@ -463,9 +344,7 @@ body {
         scale(.98);
 }
 
-
 .card.show {
-
     visibility: visible;
 
     animation:
@@ -475,11 +354,9 @@ body {
         forwards;
 }
 
-
 @keyframes cardAppear {
 
     from {
-
         opacity: 0;
 
         transform:
@@ -488,7 +365,6 @@ body {
     }
 
     to {
-
         opacity: 1;
 
         transform:
@@ -499,17 +375,13 @@ body {
 }
 
 
-/* =========================================================
-   TITLE
-========================================================= */
+/* ================= TITLE ================= */
 
 .card h1 {
-
     font-size:
         clamp(30px,7vw,39px);
 
     line-height: 1.1;
-
     font-weight: 800;
 
     letter-spacing: -1.5px;
@@ -517,51 +389,38 @@ body {
     margin-bottom: 9px;
 }
 
-
 .subtitle {
-
     color: #c0c0c0;
 
     font-size: 14px;
-
     line-height: 1.65;
 
     margin-bottom: 28px;
 }
 
 
-/* =========================================================
-   INPUTS
-========================================================= */
+/* ================= INPUTS ================= */
 
 .field {
-
     margin-bottom: 17px;
 }
 
-
 .field label {
-
     display: block;
 
     color: #eee;
 
     font-size: 13px;
-
     font-weight: 700;
 
     margin-bottom: 8px;
 }
 
-
 .input {
-
     width: 100%;
-
     height: 54px;
 
-    padding:
-        0 16px;
+    padding: 0 16px;
 
     border:
         1px solid
@@ -577,22 +436,16 @@ body {
     color: #fff;
 
     font-family: inherit;
-
     font-size: 15px;
 
-    transition:
-        .25s ease;
+    transition: .25s ease;
 }
 
-
 .input::placeholder {
-
     color: #8a8a8a;
 }
 
-
 .input:focus {
-
     background:
         rgba(10,10,10,.78);
 
@@ -605,12 +458,9 @@ body {
 }
 
 
-/* =========================================================
-   MESSAGE
-========================================================= */
+/* ================= MESSAGE ================= */
 
 #message {
-
     min-height: 20px;
 
     margin:
@@ -619,57 +469,41 @@ body {
     color: #ff5c64;
 
     font-size: 13px;
-
     line-height: 1.4;
 }
 
-
 #message.success {
-
     color: #58e58a;
 }
 
 
-/* =========================================================
-   CREATE ACCOUNT BUTTON
-========================================================= */
+/* ================= BUTTON ================= */
 
 .signup-button {
-
     width: 100%;
-
     height: 54px;
 
     border: none;
-
     border-radius: 7px;
 
-    background:
-        #e50914;
-
+    background: #e50914;
     color: #fff;
 
     font-family: inherit;
-
     font-size: 16px;
-
     font-weight: 800;
 
     cursor: pointer;
 
-    transition:
-        .2s ease;
+    transition: .2s ease;
 
     box-shadow:
         0 8px 25px
         rgba(229,9,20,.20);
 }
 
-
 .signup-button:hover {
-
-    background:
-        #f20b18;
+    background: #f20b18;
 
     transform:
         translateY(-2px);
@@ -679,34 +513,23 @@ body {
         rgba(229,9,20,.35);
 }
 
-
 .signup-button:active {
-
-    transform:
-        scale(.98);
+    transform: scale(.98);
 }
 
-
 .signup-button:disabled {
-
     opacity: .65;
-
     cursor: wait;
-
     transform: none;
 }
 
 
-/* =========================================================
-   SIGN IN
-========================================================= */
+/* ================= SIGN IN ================= */
 
 .signin-area {
-
     display: flex;
 
     align-items: center;
-
     justify-content: center;
 
     gap: 10px;
@@ -718,75 +541,57 @@ body {
     text-align: center;
 }
 
-
 .signin-area span {
-
     color: #aaa;
-
     font-size: 13px;
 }
 
-
 .signin-button {
-
     display: inline-flex;
 
     align-items: center;
-
     justify-content: center;
 
     padding:
         9px 18px;
 
-    background:
-        rgba(229,9,20,.90);
+    background: #fff;
 
-    color: #fff;
+    color: #e50914;
 
     border-radius: 6px;
 
     text-decoration: none;
 
     font-size: 13px;
+    font-weight: 800;
 
-    font-weight: 700;
-
-    transition:
-        .25s ease;
+    transition: .25s ease;
 
     box-shadow:
         0 6px 20px
-        rgba(229,9,20,.25);
+        rgba(0,0,0,.25);
 }
 
-
 .signin-button:hover {
-
-    background:
-        #f20b18;
+    background: #f5f5f5;
 
     transform:
         translateY(-2px);
 
     box-shadow:
         0 10px 28px
-        rgba(229,9,20,.40);
+        rgba(0,0,0,.40);
 }
-
 
 .signin-button:active {
-
-    transform:
-        scale(.97);
+    transform: scale(.97);
 }
 
 
-/* =========================================================
-   FOOTER
-========================================================= */
+/* ================= FOOTER ================= */
 
 .footer-text {
-
     margin-top: 18px;
 
     text-align: center;
@@ -794,113 +599,75 @@ body {
     color: #777;
 
     font-size: 10px;
-
     line-height: 1.6;
 }
 
 
-/* =========================================================
-   MOBILE
-========================================================= */
+/* ================= MOBILE ================= */
 
 @media(max-width:600px) {
 
     .navbar {
-
         height: 65px;
-
-        padding:
-            0 18px;
+        padding: 0 18px;
     }
 
-
     .logo {
-
         font-size: 27px;
     }
 
-
     .language {
-
         display: none;
     }
 
-
     .signup-area {
-
         min-height:
             calc(100vh - 65px);
 
-        align-items:
-            flex-start;
+        align-items: flex-start;
 
         padding:
             35px 18px 55px;
     }
 
-
     .card {
-
         padding:
             30px 23px;
 
-        border-radius:
-            15px;
+        border-radius: 15px;
     }
 
-
     .card h1 {
-
         font-size: 31px;
     }
 
-
     .subtitle {
-
         font-size: 13px;
-
         margin-bottom: 25px;
     }
 
-
     .input {
-
         height: 52px;
     }
 
-
     .signup-button {
-
         height: 53px;
     }
-
 }
-
-
-/* =========================================================
-   SMALL PHONES
-========================================================= */
 
 @media(max-width:380px) {
 
     .card {
-
-        padding:
-            27px 19px;
+        padding: 27px 19px;
     }
 
-
     .card h1 {
-
         font-size: 28px;
     }
 
-
     .signin-area {
-
         gap: 7px;
     }
-
 }
 
 </style>
@@ -911,47 +678,30 @@ body {
 <body>
 
 
-<!-- =======================================================
-     BACKGROUND
-======================================================= -->
+<!-- BACKGROUND -->
 
 <div class="background"></div>
 
 
-<!-- =======================================================
-     NAVBAR
-======================================================= -->
+<!-- NAVBAR -->
 
 <header class="navbar">
 
-    <a
-        href="login.html"
-        class="logo"
-    >
-
+    <a href="login.html" class="logo">
         AA <span>Movies</span>
-
     </a>
-
 
     <select class="language">
 
-        <option>
-            English
-        </option>
-
-        <option>
-            हिन्दी
-        </option>
+        <option>English</option>
+        <option>हिन्दी</option>
 
     </select>
 
 </header>
 
 
-<!-- =======================================================
-     LOADING SCREEN
-======================================================= -->
+<!-- LOADING SCREEN -->
 
 <div
     class="loading-screen"
@@ -961,11 +711,8 @@ body {
     <div class="loader">
 
         <div class="dot"></div>
-
         <div class="dot"></div>
-
         <div class="dot"></div>
-
         <div class="dot"></div>
 
     </div>
@@ -973,9 +720,7 @@ body {
 </div>
 
 
-<!-- =======================================================
-     SIGNUP CARD
-======================================================= -->
+<!-- SIGNUP -->
 
 <main class="signup-area">
 
@@ -988,7 +733,6 @@ body {
             Create account
         </h1>
 
-
         <p class="subtitle">
 
             Join AA Movies and continue
@@ -1000,8 +744,6 @@ body {
 
         <form id="signupForm">
 
-
-            <!-- NAME -->
 
             <div class="field">
 
@@ -1021,8 +763,6 @@ body {
             </div>
 
 
-            <!-- EMAIL -->
-
             <div class="field">
 
                 <label for="emailInput">
@@ -1040,8 +780,6 @@ body {
 
             </div>
 
-
-            <!-- PASSWORD -->
 
             <div class="field">
 
@@ -1062,28 +800,19 @@ body {
             </div>
 
 
-            <!-- MESSAGE -->
-
             <p id="message"></p>
 
-
-            <!-- CREATE ACCOUNT -->
 
             <button
                 class="signup-button"
                 id="signupButton"
                 type="submit"
             >
-
                 Create account
-
             </button>
-
 
         </form>
 
-
-        <!-- SIGN IN -->
 
         <div class="signin-area">
 
@@ -1091,20 +820,15 @@ body {
                 Already have an account?
             </span>
 
-
             <a
                 href="login.html"
                 class="signin-button"
             >
-
                 Sign In
-
             </a>
 
         </div>
 
-
-        <!-- FOOTER -->
 
         <p class="footer-text">
 
@@ -1122,318 +846,229 @@ body {
 </main>
 
 
-<!-- =======================================================
-     3 SECOND LOADER
-======================================================= -->
-
 <script>
 
-(function () {
+/* =========================================================
+   3 SECOND LOADER
+========================================================= */
 
-    const loadingScreen =
-        document.getElementById(
-            "loadingScreen"
-        );
+const loadingScreen =
+    document.getElementById("loadingScreen");
 
-    const signupCard =
-        document.getElementById(
-            "signupCard"
-        );
+const signupCard =
+    document.getElementById("signupCard");
 
 
-    /*
-       Keep background visible for exactly
-       3 seconds while dots animate.
-    */
+setTimeout(() => {
 
-    setTimeout(function () {
+    loadingScreen.classList.add("hide");
 
-        loadingScreen.classList.add(
-            "hide"
-        );
+    signupCard.classList.add("show");
 
-        signupCard.classList.add(
-            "show"
-        );
-
-    }, 3000);
-
-})();
+}, 3000);
 
 </script>
 
 
-<!-- =======================================================
-     FIREBASE SIGNUP
-======================================================= -->
-
 <script type="module">
 
 import {
-
     auth,
-
     db,
-
     createUserWithEmailAndPassword,
-
     doc,
-
     setDoc,
-
     serverTimestamp
-
 } from "./firebase.js";
 
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
-
 const signupForm =
-    document.getElementById(
-        "signupForm"
-    );
-
+    document.getElementById("signupForm");
 
 const nameInput =
-    document.getElementById(
-        "nameInput"
-    );
-
+    document.getElementById("nameInput");
 
 const emailInput =
-    document.getElementById(
-        "emailInput"
-    );
-
+    document.getElementById("emailInput");
 
 const passwordInput =
-    document.getElementById(
-        "passwordInput"
-    );
-
+    document.getElementById("passwordInput");
 
 const message =
-    document.getElementById(
-        "message"
-    );
-
+    document.getElementById("message");
 
 const signupButton =
-    document.getElementById(
-        "signupButton"
-    );
+    document.getElementById("signupButton");
 
 
 /* =========================================================
    SIGNUP
 ========================================================= */
 
-signupForm.addEventListener(
-    "submit",
-    async function (event) {
+signupForm.addEventListener("submit", async (event) => {
 
-        event.preventDefault();
+    event.preventDefault();
 
+    const name =
+        nameInput.value.trim();
 
-        const name =
-            nameInput.value.trim();
+    const email =
+        emailInput.value.trim();
 
-
-        const email =
-            emailInput.value.trim();
-
-
-        const password =
-            passwordInput.value;
+    const password =
+        passwordInput.value;
 
 
-        message.className = "";
+    message.className = "";
 
-        message.textContent =
-            "Creating account...";
+    message.textContent =
+        "Creating account...";
 
+    signupButton.disabled = true;
 
-        signupButton.disabled =
-            true;
-
-        signupButton.textContent =
-            "Creating account...";
+    signupButton.textContent =
+        "Creating account...";
 
 
-        try {
+    try {
+
+        /*
+         * STEP 1
+         * Create Firebase Authentication account.
+         */
+
+        const result =
+            await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
+            );
 
 
-            /* ==============================================
-               CREATE FIREBASE AUTH ACCOUNT
-            ============================================== */
-
-            const result =
-                await createUserWithEmailAndPassword(
-                    auth,
-                    email,
-                    password
-                );
+        console.log(
+            "AUTH ACCOUNT CREATED:",
+            result.user.uid
+        );
 
 
-            console.log(
-                "Firebase Auth account created:",
+        /*
+         * STEP 2
+         *
+         * Redirect immediately after Auth succeeds.
+         *
+         * Firestore is deliberately NOT awaited.
+         *
+         * This prevents a Firestore rules/network problem
+         * from trapping the user on signup.html.
+         */
+
+        window.location.replace("index.html");
+
+
+        /*
+         * STEP 3
+         *
+         * Save profile in the background.
+         *
+         * This does not control the redirect.
+         */
+
+        setDoc(
+            doc(
+                db,
+                "users",
                 result.user.uid
-            );
-
-
-            /* ==============================================
-               SAVE USER DATA TO FIRESTORE
-
-               We wait for this to finish so the profile
-               is properly saved before redirecting.
-            ============================================== */
-
-            await setDoc(
-
-                doc(
-                    db,
-                    "users",
-                    result.user.uid
-                ),
-
-                {
-                    name:
-                        name,
-
-                    email:
-                        result.user.email,
-
-                    createdAt:
-                        serverTimestamp()
-                }
-
-            );
-
+            ),
+            {
+                name: name,
+                email: result.user.email,
+                createdAt: serverTimestamp()
+            }
+        )
+        .then(() => {
 
             console.log(
-                "Firestore user profile saved."
+                "Firestore profile saved."
             );
 
-
-            /* ==============================================
-               SUCCESS
-            ============================================== */
-
-            message.className =
-                "success";
-
-
-            message.textContent =
-                "Account created successfully!";
-
-
-            signupButton.textContent =
-                "Account created ✓";
-
-
-            /* ==============================================
-               REDIRECT TO INDEX
-            ============================================== */
-
-            setTimeout(function () {
-
-                window.location.replace(
-                    "index.html"
-                );
-
-            }, 300);
-
-
-        }
-
-        catch (error) {
+        })
+        .catch((error) => {
 
             console.error(
-                "Signup error:",
+                "Firestore profile could not be saved:",
                 error
             );
 
-
-            signupButton.disabled =
-                false;
+        });
 
 
-            signupButton.textContent =
-                "Create account";
+    } catch (error) {
+
+        console.error(
+            "SIGNUP ERROR:",
+            error
+        );
 
 
-            /* ==============================================
-               FIREBASE ERRORS
-            ============================================== */
+        signupButton.disabled = false;
 
-            if (
-                error.code ===
-                "auth/email-already-in-use"
-            ) {
+        signupButton.textContent =
+            "Create account";
 
-                message.textContent =
-                    "This email is already registered.";
 
-            }
+        if (
+            error.code ===
+            "auth/email-already-in-use"
+        ) {
 
-            else if (
-                error.code ===
-                "auth/weak-password"
-            ) {
+            message.textContent =
+                "This email is already registered.";
 
-                message.textContent =
-                    "Password must contain at least 6 characters.";
+        }
 
-            }
+        else if (
+            error.code ===
+            "auth/weak-password"
+        ) {
 
-            else if (
-                error.code ===
-                "auth/invalid-email"
-            ) {
+            message.textContent =
+                "Password must contain at least 6 characters.";
 
-                message.textContent =
-                    "Please enter a valid email.";
+        }
 
-            }
+        else if (
+            error.code ===
+            "auth/invalid-email"
+        ) {
 
-            else if (
-                error.code ===
-                "auth/operation-not-allowed"
-            ) {
+            message.textContent =
+                "Please enter a valid email.";
 
-                message.textContent =
-                    "Email/password authentication is not enabled.";
+        }
 
-            }
+        else if (
+            error.code ===
+            "auth/operation-not-allowed"
+        ) {
 
-            else if (
-                error.code ===
-                "permission-denied"
-            ) {
+            message.textContent =
+                "Email/password authentication is not enabled.";
 
-                message.textContent =
-                    "Account created, but your profile could not be saved.";
+        }
 
-            }
+        else {
 
-            else {
-
-                message.textContent =
-                    error.message ||
-                    "Unable to create account.";
-
-            }
+            message.textContent =
+                error.message ||
+                "Unable to create account.";
 
         }
 
     }
-);
+
+});
 
 </script>
 
-
 </body>
-
 </html>
