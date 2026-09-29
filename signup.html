@@ -1,139 +1,1194 @@
 <!doctype html>
-<html>
+<html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sign Up</title>
-  <link rel="stylesheet" href="style.css">
+
+<meta charset="utf-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+>
+
+<meta
+    name="theme-color"
+    content="#000000"
+>
+
+<title>Create Account • AA Movies</title>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="favicon-file_00000000e048820b91cd39ad4bd06335.png"
+>
+
+<style>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+    font-family: Inter, Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+.background {
+
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+
+    background-image:
+        url("https://cdn.marvel.com/content/1x/avengersdoomsday_lob_crd_03.webp");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    transform: scale(1.04);
+
+    animation:
+        backgroundZoom
+        15s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.background::before {
+
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(0,0,0,.72) 0%,
+            rgba(0,0,0,.55) 35%,
+            rgba(0,0,0,.82) 75%,
+            rgba(0,0,0,.98) 100%
+        );
+}
+
+.background::after {
+
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 10%,
+            rgba(0,0,0,.75) 100%
+        );
+}
+
+@keyframes backgroundZoom {
+
+    from {
+        transform: scale(1.04);
+    }
+
+    to {
+        transform: scale(1.10);
+    }
+
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+
+    position: relative;
+    z-index: 20;
+
+    height: 75px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding:
+        0 clamp(20px,5vw,55px);
+}
+
+.logo {
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size:
+        clamp(25px,4vw,34px);
+
+    font-weight: 900;
+
+    letter-spacing: -1.8px;
+}
+
+.logo span {
+
+    color: #e50914;
+
+    text-shadow:
+        0 0 18px
+        rgba(229,9,20,.45);
+}
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+.language {
+
+    padding: 9px 13px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.28);
+
+    border-radius: 6px;
+
+    background:
+        rgba(0,0,0,.55);
+
+    color: #fff;
+
+    outline: none;
+
+    font-size: 13px;
+
+    backdrop-filter: blur(10px);
+}
+
+.language option {
+
+    background: #111;
+    color: white;
+}
+
+
+/* =========================================================
+   LOADING SCREEN
+========================================================= */
+
+.loading-screen {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #000;
+
+    opacity: 1;
+    visibility: visible;
+
+    transition:
+        opacity .35s ease,
+        visibility .35s ease;
+}
+
+.loading-screen.hide {
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   FOUR DOT CIRCULAR LOADER
+========================================================= */
+
+.loader {
+
+    position: relative;
+
+    width: 70px;
+    height: 70px;
+}
+
+.dot {
+
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    top: 30px;
+    left: 30px;
+
+    border-radius: 50%;
+
+    background: #fff;
+
+    box-shadow:
+        0 0 12px
+        rgba(255,255,255,.8);
+
+    animation:
+        circleMove
+        1.2s
+        linear
+        infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: -.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: -.6s;
+}
+
+.dot:nth-child(4) {
+    animation-delay: -.9s;
+}
+
+@keyframes circleMove {
+
+    0% {
+
+        transform:
+            rotate(0deg)
+            translateX(25px);
+
+        opacity: .35;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    50% {
+
+        transform:
+            rotate(180deg)
+            translateX(25px);
+
+        opacity: .35;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+
+        transform:
+            rotate(360deg)
+            translateX(25px);
+
+        opacity: .35;
+    }
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.signup-area {
+
+    position: relative;
+    z-index: 5;
+
+    min-height:
+        calc(100vh - 75px);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding:
+        25px 20px 60px;
+}
+
+
+/* =========================================================
+   SIGNUP CARD
+========================================================= */
+
+.card {
+
+    width:
+        min(470px,100%);
+
+    padding:
+        38px 40px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.16);
+
+    border-radius: 17px;
+
+    background:
+        rgba(0,0,0,.73);
+
+    box-shadow:
+
+        0 30px 80px
+        rgba(0,0,0,.75),
+
+        0 0 45px
+        rgba(0,0,0,.35);
+
+    backdrop-filter:
+        blur(15px);
+
+    -webkit-backdrop-filter:
+        blur(15px);
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform:
+        translateY(25px)
+        scale(.98);
+}
+
+.card.show {
+
+    visibility: visible;
+
+    animation:
+        cardAppear
+        .65s
+        cubic-bezier(.2,.8,.2,1)
+        forwards;
+}
+
+@keyframes cardAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px)
+            scale(.98);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.card h1 {
+
+    font-size:
+        clamp(30px,7vw,39px);
+
+    line-height: 1.1;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 9px;
+}
+
+.subtitle {
+
+    color: #a8a8a8;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    margin-bottom: 28px;
+}
+
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.field {
+
+    margin-bottom: 17px;
+}
+
+.field label {
+
+    display: block;
+
+    color: #ddd;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+}
+
+.input {
+
+    width: 100%;
+
+    height: 54px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    background:
+        rgba(32,32,32,.94);
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    transition: .25s ease;
+}
+
+.input::placeholder {
+    color: #777;
+}
+
+.input:focus {
+
+    background:
+        rgba(25,25,25,.98);
+
+    border-color:
+        rgba(229,9,20,.9);
+
+    box-shadow:
+        0 0 0 2px
+        rgba(229,9,20,.12);
+}
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+#message {
+
+    min-height: 20px;
+
+    margin:
+        0 0 10px;
+
+    color: #ff5c64;
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+#message.success {
+    color: #58e58a;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.signup-button {
+
+    width: 100%;
+
+    height: 54px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #e50914;
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+
+    box-shadow:
+        0 8px 25px
+        rgba(229,9,20,.20);
+}
+
+.signup-button:hover {
+
+    background: #f20b18;
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 12px 35px
+        rgba(229,9,20,.35);
+}
+
+.signup-button:active {
+    transform: scale(.98);
+}
+
+.signup-button:disabled {
+
+    opacity: .65;
+
+    cursor: wait;
+
+    transform: none;
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+.login-text {
+
+    margin-top: 23px;
+
+    text-align: center;
+
+    color: #888;
+
+    font-size: 13px;
+}
+
+.login-text a {
+
+    color: #fff;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: .2s;
+}
+
+.login-text a:hover {
+    color: #e50914;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer-text {
+
+    margin-top: 18px;
+
+    text-align: center;
+
+    color: #626262;
+
+    font-size: 10px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:600px) {
+
+    .navbar {
+
+        height: 65px;
+
+        padding:
+            0 18px;
+    }
+
+    .logo {
+        font-size: 27px;
+    }
+
+    .language {
+        display: none;
+    }
+
+    .signup-area {
+
+        min-height:
+            calc(100vh - 65px);
+
+        align-items:
+            flex-start;
+
+        padding:
+            35px 18px 55px;
+    }
+
+    .card {
+
+        padding:
+            30px 23px;
+
+        border-radius:
+            15px;
+    }
+
+    .card h1 {
+        font-size: 31px;
+    }
+
+    .subtitle {
+        font-size: 13px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL PHONES
+========================================================= */
+
+@media(max-width:380px) {
+
+    .card {
+        padding: 27px 19px;
+    }
+
+    .card h1 {
+        font-size: 28px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
-<main class="card">
 
-  <h1>Create account</h1>
+<!-- =======================================================
+     BACKGROUND
+======================================================= -->
 
-  <form id="signupForm">
+<div class="background"></div>
 
-    <input
-      id="nameInput"
-      type="text"
-      placeholder="Name"
-      required
+
+<!-- =======================================================
+     NAVBAR
+======================================================= -->
+
+<header class="navbar">
+
+    <a
+        href="login.html"
+        class="logo"
     >
 
-    <input
-      id="emailInput"
-      type="email"
-      placeholder="Email"
-      required
+        AA <span>Movies</span>
+
+    </a>
+
+
+    <select class="language">
+
+        <option>English</option>
+
+        <option>हिन्दी</option>
+
+    </select>
+
+</header>
+
+
+<!-- =======================================================
+     LOADING SCREEN
+======================================================= -->
+
+<div
+    class="loading-screen"
+    id="loadingScreen"
+>
+
+    <div class="loader">
+
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+
+    </div>
+
+</div>
+
+
+<!-- =======================================================
+     SIGNUP CARD
+======================================================= -->
+
+<main class="signup-area">
+
+    <section
+        class="card"
+        id="signupCard"
     >
 
-    <input
-      id="passwordInput"
-      type="password"
-      placeholder="Password (6+ characters)"
-      minlength="6"
-      required
-    >
+        <h1>
+            Create account
+        </h1>
 
-    <button type="submit">Create account</button>
 
-  </form>
+        <p class="subtitle">
 
-  <p id="message"></p>
+            Join AA Movies and continue
+            watching your favourite movies
+            and shows.
 
-  <p>
-    Already have an account?
-    <a href="login.html">Login</a>
-  </p>
+        </p>
+
+
+        <form id="signupForm">
+
+
+            <div class="field">
+
+                <label for="nameInput">
+                    Name
+                </label>
+
+                <input
+                    class="input"
+                    id="nameInput"
+                    type="text"
+                    placeholder="Name"
+                    autocomplete="name"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="emailInput">
+                    Email
+                </label>
+
+                <input
+                    class="input"
+                    id="emailInput"
+                    type="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="passwordInput">
+                    Password
+                </label>
+
+                <input
+                    class="input"
+                    id="passwordInput"
+                    type="password"
+                    placeholder="Password (6+ characters)"
+                    minlength="6"
+                    autocomplete="new-password"
+                    required
+                >
+
+            </div>
+
+
+            <p id="message"></p>
+
+
+            <button
+                class="signup-button"
+                id="signupButton"
+                type="submit"
+            >
+                Create account
+            </button>
+
+
+        </form>
+
+
+        <p class="login-text">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </p>
+
+
+        <p class="footer-text">
+
+            By creating an account, you agree
+            to use AA Movies responsibly.
+
+            <br>
+
+            © 2026 AA Movies
+
+        </p>
+
+    </section>
 
 </main>
+
+
+<!-- =======================================================
+     3 SECOND LOADER
+======================================================= -->
+
+<script>
+
+setTimeout(function () {
+
+    const loadingScreen =
+        document.getElementById(
+            "loadingScreen"
+        );
+
+    const signupCard =
+        document.getElementById(
+            "signupCard"
+        );
+
+
+    loadingScreen.classList.add("hide");
+
+    signupCard.classList.add("show");
+
+}, 3000);
+
+</script>
+
+
+<!-- =======================================================
+     FIREBASE SIGNUP
+======================================================= -->
 
 <script type="module">
 
 import {
-  auth,
-  db,
-  createUserWithEmailAndPassword,
-  doc,
-  setDoc,
-  serverTimestamp
+    auth,
+    db,
+    createUserWithEmailAndPassword,
+    doc,
+    setDoc,
+    serverTimestamp
 } from "./firebase.js";
 
 
-const signupForm = document.getElementById("signupForm");
-const nameInput = document.getElementById("nameInput");
-const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const message = document.getElementById("message");
-
-
-signupForm.addEventListener("submit", async (event) => {
-
-  event.preventDefault();
-
-  message.textContent = "Creating account...";
-
-  const name = nameInput.value.trim();
-  const email = emailInput.value.trim();
-  const password = passwordInput.value;
-
-
-  try {
-
-    const result =
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-
-    await setDoc(
-      doc(db, "users", result.user.uid),
-      {
-        name: name,
-        email: result.user.email,
-        createdAt: serverTimestamp()
-      }
+const signupForm =
+    document.getElementById(
+        "signupForm"
     );
 
 
-    window.location.replace("M2.html");
+const nameInput =
+    document.getElementById(
+        "nameInput"
+    );
 
 
-  } catch (error) {
+const emailInput =
+    document.getElementById(
+        "emailInput"
+    );
 
-    console.error(error);
 
-    if (error.code === "auth/email-already-in-use") {
+const passwordInput =
+    document.getElementById(
+        "passwordInput"
+    );
 
-      message.textContent =
-        "This email is already registered.";
 
-    } else if (error.code === "auth/weak-password") {
+const message =
+    document.getElementById(
+        "message"
+    );
 
-      message.textContent =
-        "Password must contain at least 6 characters.";
 
-    } else if (error.code === "auth/invalid-email") {
+const signupButton =
+    document.getElementById(
+        "signupButton"
+    );
 
-      message.textContent =
-        "Please enter a valid email.";
 
-    } else {
+/* =========================================================
+   SIGNUP
+========================================================= */
 
-      message.textContent =
-        error.message;
+signupForm.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+        const email =
+            emailInput.value.trim();
+
+        const password =
+            passwordInput.value;
+
+
+        message.className = "";
+
+        message.textContent =
+            "Creating account...";
+
+
+        signupButton.disabled = true;
+
+        signupButton.textContent =
+            "Creating account...";
+
+
+        try {
+
+
+            /* ==============================================
+               CREATE FIREBASE AUTH ACCOUNT
+            ============================================== */
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            console.log(
+                "Firebase Auth account created:",
+                result.user.uid
+            );
+
+
+            /* ==============================================
+               SAVE USER PROFILE
+
+               This runs independently.
+
+               It CANNOT prevent the redirect.
+            ============================================== */
+
+            setDoc(
+                doc(
+                    db,
+                    "users",
+                    result.user.uid
+                ),
+                {
+                    name: name,
+                    email: result.user.email,
+                    createdAt: serverTimestamp()
+                }
+            )
+            .then(function () {
+
+                console.log(
+                    "Firestore user profile saved."
+                );
+
+            })
+            .catch(function (error) {
+
+                console.error(
+                    "Firestore profile error:",
+                    error
+                );
+
+            });
+
+
+            /* ==============================================
+               AUTH SUCCESS
+            ============================================== */
+
+            message.className =
+                "success";
+
+            message.textContent =
+                "Account created successfully!";
+
+
+            signupButton.textContent =
+                "Account created ✓";
+
+
+            /* ==============================================
+               REDIRECT
+
+               Firestore is NOT awaited.
+            ============================================== */
+
+            window.location.replace(
+                "M2.html"
+            );
+
+
+        } catch (error) {
+
+
+            console.error(
+                "Signup error:",
+                error
+            );
+
+
+            signupButton.disabled =
+                false;
+
+            signupButton.textContent =
+                "Create account";
+
+
+            /* ==============================================
+               FIREBASE AUTH ERRORS
+            ============================================== */
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                message.textContent =
+                    "This email is already registered.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                message.textContent =
+                    "Password must contain at least 6 characters.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/invalid-email"
+            ) {
+
+                message.textContent =
+                    "Please enter a valid email.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/operation-not-allowed"
+            ) {
+
+                message.textContent =
+                    "Email/password authentication is not enabled.";
+
+            }
+
+            else {
+
+                message.textContent =
+                    error.message ||
+                    "Unable to create account.";
+
+            }
+
+        }
 
     }
-
-  }
-
-});
+);
 
 </script>
 
+
 </body>
+
 </html>
