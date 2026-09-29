@@ -1,8 +1,4 @@
-/* ============================================================
-   AA Moviez — Movie Database
-   Demo/placeholder data only. Replace poster/backdrop/videoUrl
-   with your own licensed assets before going live.
-   ============================================================ */
+
 
 const movies = [
   {
